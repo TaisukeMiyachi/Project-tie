@@ -31,7 +31,12 @@ class MessageController extends Controller
     //QRコードの確認
     public function checkqr()
     {
-        return response()->view('message.check_qr');
+        $latestRecord = Message::latest('updated_at')->first();
+
+        return response()->view('message.check_qr', ['latestRecord' => $latestRecord]);
+        // $latestRecord = DB::table('messages')->latest()->first();
+        // dd($latestRecord);
+        // return response()->view('message.check_qr', ['latestRecord' => $latestRecord]);
     }
 
 
@@ -47,15 +52,19 @@ class MessageController extends Controller
             "message" => 'required',
             "image_name"=> 'image|max:1024'
         ]);
-        // dd($request->image);
+        
         $message = new Message();
+
         $message -> message = $request -> message;
         $message -> student_id = auth() -> user() -> id;
-
         if(request('image')){
-            $name = request() -> file("image") -> getClientoriginalName();
+            $original = request() -> file("image") -> getClientoriginalName();
+            $name = date("Ymd_His")."_".$original;
+            // $message -> image_name = $name;
+            request() -> file("image") -> move("storage/images", $name);
             $message -> image_name = $name;
         }
+
         $message -> save();
 
         return redirect() -> route('checkqr');
