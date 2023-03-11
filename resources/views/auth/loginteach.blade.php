@@ -7,8 +7,7 @@
             戻る
         </a>
     </div>
-//////////////////////////
-    <form method="POST" action="{{ route('loginteach') }}">
+    <form method="POST" action="{{ route('login2') }}">
         @csrf
 
         <!-- Email Address -->

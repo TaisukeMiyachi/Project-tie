@@ -14,10 +14,15 @@
     <nav class="w-full bg-gray-800 h-20 shadow-lg">
         <div class="flex">
             <div id="header-left" class="w-1/3 flex start flex items-center text-white mt-3 ml-20 font-bold">
-                 <form action="{{ route('logout') }}" method="POST">
+                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    @method('POST')
-                    < ログアウト</form>
+
+                    <x-responsive-nav-link :href="route('logout')"
+                            onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                        {{ __('Log Out') }}
+                    </x-responsive-nav-link>
+                </form>
             </div>
             
             <div id="header-right" class="lg:items-right w-2/3">

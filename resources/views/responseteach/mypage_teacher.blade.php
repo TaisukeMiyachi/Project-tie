@@ -9,40 +9,55 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-200">
-    <section class="flex h-screen">
-        <div class="text-center">
-            <!-- ヘッダー -->
-            <nav class="w-full mt-5">
-                <div class="flex justify-between max-w-5xl mx-auto items-center">
-                    <div class="">
-                        <div class="mx-4 lg:flex lg:items-center">
-                            <!-- ボタン設置     -->
-                            <a href="#"
-                                class="ml-5 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                                ログアウト
-                            </a>
-                            <a href="#"
-                                class="ml-5 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                                出した手紙一覧
-                            </a>
-                            <a href="{{ route('message.create') }}"
-                                class="ml-5 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                                手紙を書く
-                            </a>
-                        </div>
-                    </div>
+<body class="w-full h-screen bg-gray-200">
+    <!-- ヘッダー -->
+    <nav class="w-full bg-gray-800 h-20 shadow-lg">
+        <div class="flex">
+            <div id="header-left" class="w-1/3 flex start flex items-center text-white mt-3 ml-20 font-bold">
+                 <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+
+                    <x-responsive-nav-link :href="route('logout')"
+                            onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                        {{ __('Log Out') }}
+                    </x-responsive-nav-link>
+                </form>
+            </div>
+            
+            <div id="header-right" class="lg:items-right w-2/3">
+                
+                <div class="flex justify-end text-center mt-4">
+                    <a href="#" class="flex items-center font-semibold text-white shadow-sm mr-5" >出したメッセージ一覧
+                    </a>
+                    <a href="{{ route('message.create') }}"
+                                class="shadow-lg bg-orange-500 shadow-orange-500/50 text-white rounded-full border-4 border-gray-300 px-4 py-2 text-xl w-50 h-12 font-bold mr-20">
+                                メッセージを書く
+                    </a>
                 </div>
-            </nav>
+            </div>
         </div>
-        <p>mypage（先生）</p>
-    </section>
-     <a href="{{ route('responseteach.create') }}"
-                                class="ml-5 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                                返信する
-    </a>
-    <!-- MainContents[end] -->
+    </nav>
+    <!-- body -->
+    <section class="w-80% h-screen bg-orange-50">
+            <div class="mx-4 pt-5 flex justify-center text-gray-400" style="font-size: 48px;">
+                {{ Auth::user()->name }}のMy Page
+            </div>
+            <section id="" class="w-1/4 h-1/3 bg-gray-300 m-5 border-3">
+                <div class="w-3/4 h-3/4 border-width:1px">
+                </div>
+                <x-primary-button class="ml-3">
+                    <a href="{{ route('response.create') }}">{{ __('返信する') }}</a>
+                </x-primary-button>
+            </section>
+            <section id="" class="w-1/4 h-1/3 bg-gray-300 m-5 border-3">
+                <div class="w-3/4 h-3/4 border-width:1px">
 
-</body>
-
+                </div>
+                <x-primary-button class="ml-3">
+                    <a href="{{ route('response.create') }}">{{ __('返信する') }}</a>
+                </x-primary-button>
+            </section>
+        </section>
+    </body>
 </html>

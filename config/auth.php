@@ -39,7 +39,12 @@ return [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
-        ],
+             ],
+
+        'teacher' => [
+            'driver' => 'token',
+            'provider' => 'users',
+            ],
     ],
 
     /*
@@ -63,6 +68,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+
+        'teacher' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\TeacherUser::class,
         ],
 
         // 'users' => [

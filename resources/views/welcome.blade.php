@@ -46,8 +46,8 @@
                             <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">生徒用登録</a>
                         @endif
                     @endauth
-                    <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">先生用登録</a>
-                    <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">先生はこちらから</a>
+                    <a href="{{ route('register2') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">先生用登録</a>
+                    <a href="{{ route('login2') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">先生はこちらから（先生用ログイン）</a>
                 </div>
             @endif
             <!-- <button class="shadow-lg bg-orange-500 shadow-orange-500/50 text-white rounded px-2 py-1">メッセージを送る</button> -->

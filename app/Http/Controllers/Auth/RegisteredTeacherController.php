@@ -13,14 +13,14 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
-class RegisteredUserController extends Controller
+class RegisteredTeacherController extends Controller
 {
     /**
      * Display the registration view.
      */
     public function create(): View
     {
-        return view('auth.register');
+        return view('auth.registerteach');
     }
 
     /**
@@ -35,12 +35,12 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-        //usertype => 1 (生徒)
+        //usertype => 2 (教員)
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'usertype' => 1,
+            'usertype' => 2,
         ]);
 
         event(new Registered($user));
@@ -48,6 +48,6 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         // return redirect(RouteServiceProvider::HOME);
-        return redirect(route("mypagestu"));
+        return redirect(route("mypageteach"));
     }
 }
