@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Validator;
 use App\Models\Message;
+use App\Models\User;
 use App\Http\Requests\MessageRequest;
+use Auth;
 
 class MessageController extends Controller
 {
@@ -13,7 +15,14 @@ class MessageController extends Controller
     //My page（生徒用）
     public function mypagestu()
     {
-        return view('message.mypage_student');
+        $user_id = auth()->user()->id;
+        $data = Message::with('user')->where('send_to', $user_id)->get();   
+        // $user_id = auth() -> user() -> id;
+        // dd($student_id);
+        // $data = Message::with('user')->where('user_id', $user_id)->get();
+        // $name = User::where('id', $student_id)->get();
+        // dd($data);
+        return view('message.mypage_student', ['data' => $data]);
     }
 
     //messageを作成
@@ -55,8 +64,9 @@ class MessageController extends Controller
         
         $message = new Message();
 
+        $message -> user_id = auth() -> user() -> id;
         $message -> message = $request -> message;
-        $message -> student_id = auth() -> user() -> id;
+        
         if(request('image')){
             $original = request() -> file("image") -> getClientoriginalName();
             $name = date("Ymd_His")."_".$original;
@@ -67,8 +77,10 @@ class MessageController extends Controller
 
         $message -> save();
 
-        return redirect() -> route('checkqr');
-        
+        //メール送信を書く
+
+
+        return redirect(route("checkqr"));
     }
     
     public function show($id)

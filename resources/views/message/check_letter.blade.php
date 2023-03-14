@@ -15,7 +15,7 @@
         <!-- ヘッダー -->
         <nav class="w-full mt-5">
             <div class="flex justify-between max-w-5xl mx-auto items-center">
-                <a href="{{ route('message.create') }}"
+                <a href="{{ route('mypageteach') }}"
                     class="ml-5 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                     戻る
                 </a>

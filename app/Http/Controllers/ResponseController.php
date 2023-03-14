@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Validator;
 use App\Models\Response;
+use App\Models\Message;
 
 class ResponseController extends Controller
 {
@@ -25,15 +26,21 @@ class ResponseController extends Controller
      */
 
     //responseを作成
-    public function create()
-    {
-        return response()->view('response.create_response');
-    }
+   public function create(Request $request)
+{
+    $data = json_decode($request->input('message'));
+    // $datauser = $data -> user;
+    // dd($datauser);
+    return response()->view('response.create_response', ['data' => $data]);
+}
 
     //responseをcheck
     public function checkres()
     {
-        return response()->view('response.check_response');
+        $latestRecord = Message::latest('updated_at')->first();
+
+        return response()->view('response.check_response', ['latestRecord' => $latestRecord]);
+        
     }
 
     /**
@@ -44,7 +51,33 @@ class ResponseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $inputs = $request -> validate([
+            "message" => 'required',
+            "image_name"=> 'image|max:1024'
+        ]);
+        
+        // dd($request);
+
+        $message = new Message();
+
+        $message -> user_id = auth() -> user() -> id;
+        $message -> message = $request -> message;
+        $message -> send_to = $request -> send_to;
+        
+        if(request('image')){
+            $original = request() -> file("image") -> getClientoriginalName();
+            $name = date("Ymd_His")."_".$original;
+            // $message -> image_name = $name;
+            request() -> file("image") -> move("storage/images", $name);
+            $message -> image_name = $name;
+        }
+
+        $message -> save();
+
+        
+        //メール送信を書く
+
+        return redirect(route("checkres"));
     }
 
     /**

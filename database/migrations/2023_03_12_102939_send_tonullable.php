@@ -13,14 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('teachers', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->integer('usertype');
-            $table->timestamps();
-            $table->timestamps('deleted_at')->nullable();
+        Schema::table('messages', function (Blueprint $table) {
+            $table->string('send_to')->nullable()->change();
         });
     }
 
@@ -31,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('teachers');
+        Schema::table('messages', function (Blueprint $table) {
+            $table->string('send_to')->nullable(false)->change();
+        });
     }
 };

@@ -9,7 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="w-full h-screen bg-gray-200">
+<body class="w-full h-full bg-orange-50">
     <!-- ヘッダー -->
     <nav class="w-full bg-gray-800 h-20 shadow-lg">
         <div class="flex">
@@ -40,26 +40,32 @@
     </nav>
     <!-- body -->
     <section class="w-80% h-screen bg-orange-50">
-            <div class="mx-4 pt-5 flex justify-center text-gray-400" style="font-size: 48px;">
-                {{ Auth::user()->name }}のMy Page
-            </div>
-            <section id="" class="w-1/4 h-1/3 bg-gray-300 m-5 border-3">
-                <div class="w-3/4 h-3/4 border-width:1px">
-                </div>
-                <x-primary-button class="ml-3">
-                    <a href="{{ route('response.create') }}">{{ __('返信する') }}</a>
-                </x-primary-button>
-            </section>
-            <section id="" class="w-1/4 h-1/3 bg-gray-300 m-5 border-3">
-                <div class="w-3/4 h-3/4 border-width:1px">
+        <div class="mx-4 pt-5 flex justify-center text-gray-400" style="font-size: 48px;">
+            {{ Auth::user()->name }}のMy Page
+        </div>
 
+        <div class="flex flex-wrap justify-center mx-auto mb-4">
+         @foreach ($data as $message)
+            <div class="mt-5 w-full md:w-1/3 lg:w-1/3 p-4 letter relative">
+                <div class="absolute top-0 text-2xl font-serif leading-tight">{{ $message->user->name }}さんから</div>
+                   <div class="h-64 md:h-80 lg:h-96 bg-white bg-opacity-80 flex items-start justify-start p-12">
+                       <p class="text-2xl font-serif leading-tight">{{ $message->message }}</p>
+                    </div>
+                    <form method="GET" action="{{ route('response.create') }}">
+                        @csrf
+                        <div class="flex justify-center">
+                            <input type="hidden" name="message" value="{{ $message }}">
+                            <button type="submit" class="px-4 py-2 text-white bg-blue-500 hover:bg-blue-600 rounded">返信する</button>
+                        </div>
+                    </form>
+
+                    <!-- <div class="flex justify-center">
+                        <button class="px-4 py-2 text-white bg-blue-500 hover:bg-blue-600 rounded">返信する</button>
+                    </div> -->
                 </div>
-                <x-primary-button class="ml-3">
-                    <a href="{{ route('response.create') }}">{{ __('返信する') }}</a>
-                </x-primary-button>
-            </section>
-        </section>
-    <!-- </section> -->
+        @endforeach
+            </div>
+        </div>
 </body>
 
 </html>
