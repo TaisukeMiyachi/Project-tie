@@ -15,13 +15,15 @@ return new class extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->integer("student_id");
-            $table->integer("teacher_id");
+            $table->unsignedBigInteger('user_id');
             $table->text("message");
-            $table->string("image")->nullable();
-            $table->boolean('send')->default(false);
+            $table->string("image_name")->nullable();
+            $table->integer('send_to')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+             // user_idカラムに対する外部キー制約を設定
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
