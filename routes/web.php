@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ResponseController;
 use App\Http\Controllers\ResponseteachController;
+use App\Http\Controllers\MailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,9 @@ Route::resource('message', MessageController::class);
 Route::get('/checkqr', 'App\Http\Controllers\MessageController@checkqr')->name('checkqr');
 
 Route::post('/message/store', 'App\Http\Controllers\MessageController@store')->name('store');
+
+Route::post('/message/presentation', 'App\Http\Controllers\MessageController@presentation')->name('presentation');
+
 //message check
 Route::get('/check', 'App\Http\Controllers\MessageController@check')->name('check');
 
@@ -40,6 +44,8 @@ Route::resource('response', ResponseController::class);
 
 //response check
 Route::get('/checkres', 'App\Http\Controllers\ResponseController@checkres')->name('checkres');
+
+Route::post('/response/presentation', 'App\Http\Controllers\ResponseController@presentation')->name('res.presentation');
 
 //My page(先生用)
 Route::get('/mypageteach', 'App\Http\Controllers\ResponseteachController@mypageteach')->name('mypageteach');
@@ -50,6 +56,8 @@ Route::resource('responseteach', ResponseteachController::class);
 //response check（先生から）
 Route::get('/checkresteach', 'App\Http\Controllers\ResponseteachController@checkresteach')->name('checkresteach');
 
+//mail配信
+Route::post('/mail/send', [MailController::class, 'send']) -> name('mail.send');
 
 //ログイン
 Route::get('/dashboard', function () {

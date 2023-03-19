@@ -5,8 +5,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>create_response.blade.php</title>
+    <title>check_response.blade.php</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    function submitForms() {
+        document.getElementById("response-form").submit();
+        document.getElementById("mail-form").submit();
+    }
+    </script>
 </head>
 
 <body class="bg-orange-50">
@@ -24,23 +30,34 @@
         <!-- メイン -->
         @csrf
         <div class="mx-auto max-w-2xl px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-            <!-- {{ $latestRecord->student_id }} -->
             <div class="bg-cover bg-center h-screen" style="background-image: url('/images/paper-47838_1280.png')">
-                {{ $latestRecord->message }}
+                {{ $data->message }}
             </div>
-            <!-- <textarea cols="30" rows="15"
-                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                              style="font-size:30px; background-image: url('/images/paper-47838_1280.png') ">
-                {{ $latestRecord->message }}        
-            </textarea> -->
-            @if($latestRecord->image_name)
-                <img src="{{ asset('storage/images/'.$latestRecord->image_name)}}" class="mx-auto" style="height:300px;">
+
+            @if($data->image_name)
+                <img src="{{ asset('storage/images/'.$data->image_name)}}" class="mx-auto" style="height:300px;">
             @endif
             <div class="flex items-center justify-center mt-4">
-              <x-primary-button class="ml-3">
-                <a href="{{ route('checkqr') }}">{{ __('印刷') }}</a>
-              </x-primary-button>
+                <form id="response-form" action="{{ route('response.store') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="message" value="{{ $data->message }}">
+                    <input type="hidden" name="image_name" value="{{ $data->image_name }}">                    
+                    <input type="hidden" name="send_to" value="{{ $data->send_to }}">
+                    <x-primary-button class="ml-3">
+                        {{ __('送る') }}
+                    </x-primary-button>
+                </form>
+                <form id="mail-form" action="{{ route('mail.send') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="message" value="{{ $data->message }}">
+                    <input type="hidden" name="image_name" value="{{ $data->image_name }}">                    
+                    <input type="hidden" name="send_to" value="{{ $data->send_to }}">
+                    <x-primary-button class="ml-3" onclick="submitForms();">
+                        {{ __('送信') }}
+                    </x-primary-button>
+                </form>
             </div>
+            
         </div>
 </body>
 </html>

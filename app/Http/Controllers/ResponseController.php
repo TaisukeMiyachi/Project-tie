@@ -26,21 +26,48 @@ class ResponseController extends Controller
      */
 
     //responseを作成
-   public function create(Request $request)
-{
-    $data = json_decode($request->input('message'));
-    // $datauser = $data -> user;
-    // dd($datauser);
-    return response()->view('response.create_response', ['data' => $data]);
-}
-
-    //responseをcheck
-    public function checkres()
+    public function create(Request $request)
     {
-        $latestRecord = Message::latest('updated_at')->first();
+        $data = json_decode($request->input('message'));
+// dd($data);
+        return response()->view('response.create_response', ['data' => $data]);
+    }
 
-        return response()->view('response.check_response', ['latestRecord' => $latestRecord]);
+    public function presentation(Request $request)
+    {
+        $inputs = $request -> validate([
+            "message" => 'required',
+            "image_name"=> 'image|max:1024'
+        ]);
         
+        // dd($request);
+
+        $data = new Message();
+
+        $data -> user_id = auth() -> user() -> id;
+        $data -> message = $request -> message;
+        $data -> send_to = $request -> send_to;
+// dd($data->send_to);
+        if(request('image')){
+            $original = request() -> file("image") -> getClientoriginalName();
+            $name = date("Ymd_His")."_".$original;
+            request() -> file("image") -> move("storage/images", $name);
+            $data -> image_name = $name;
+        }
+         
+        return redirect()->route('checkres')->with('data', $data);
+    }
+    //responseをcheck
+    public function checkres(Request $request)
+    {
+        
+        $data = $request->session()->get('data');
+        return view('response.check_response', compact('data'));
+        
+        // $latestRecord = Message::latest('updated_at')->first();
+
+        // return response()->view('response.check_response', ['latestRecord' => $latestRecord]);
+    //  dd($laltestRecord);   
     }
 
     /**
@@ -51,33 +78,32 @@ class ResponseController extends Controller
      */
     public function store(Request $request)
     {
-        $inputs = $request -> validate([
-            "message" => 'required',
-            "image_name"=> 'image|max:1024'
-        ]);
+        // $inputs = $request -> validate([
+        //     "message" => 'required',
+        //     "image_name"=> 'image|max:1024'
+        // ]);
         
-        // dd($request);
+        // dd($request -> send_to);
 
         $message = new Message();
 
         $message -> user_id = auth() -> user() -> id;
         $message -> message = $request -> message;
         $message -> send_to = $request -> send_to;
-        
-        if(request('image')){
-            $original = request() -> file("image") -> getClientoriginalName();
-            $name = date("Ymd_His")."_".$original;
-            // $message -> image_name = $name;
-            request() -> file("image") -> move("storage/images", $name);
-            $message -> image_name = $name;
-        }
-
+        $message -> image_name = $request->image_name;
+        // if(request('image')){
+        //     $original = request() -> file("image") -> getClientoriginalName();
+        //     $name = date("Ymd_His")."_".$original;
+        //     request() -> file("image") -> move("storage/images", $name);
+        //     $message -> image_name = $name;
+        // }
+    // dd($message->image_name);
         $message -> save();
 
         
         //メール送信を書く
 
-        return redirect(route("checkres"));
+        // return redirect(route(""));
     }
 
     /**

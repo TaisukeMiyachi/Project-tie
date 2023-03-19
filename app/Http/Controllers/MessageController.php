@@ -17,11 +17,6 @@ class MessageController extends Controller
     {
         $user_id = auth()->user()->id;
         $data = Message::with('user')->where('send_to', $user_id)->get();   
-        // $user_id = auth() -> user() -> id;
-        // dd($student_id);
-        // $data = Message::with('user')->where('user_id', $user_id)->get();
-        // $name = User::where('id', $student_id)->get();
-        // dd($data);
         return view('message.mypage_student', ['data' => $data]);
     }
 
@@ -37,50 +32,52 @@ class MessageController extends Controller
         return view('message.check_letter');
     }
 
-    //QRコードの確認
-    public function checkqr()
-    {
-        $latestRecord = Message::latest('updated_at')->first();
-
-        return response()->view('message.check_qr', ['latestRecord' => $latestRecord]);
-        // $latestRecord = DB::table('messages')->latest()->first();
-        // dd($latestRecord);
-        // return response()->view('message.check_qr', ['latestRecord' => $latestRecord]);
-    }
-
-
+    
     public function index()
     {
-        //
+       //
     }
 
-    
-    public function store(MessageRequest $request)
+    public function presentation(Request $request)
     {
         $inputs = $request -> validate([
             "message" => 'required',
             "image_name"=> 'image|max:1024'
         ]);
         
-        $message = new Message();
+        $data = new Message();
 
-        $message -> user_id = auth() -> user() -> id;
-        $message -> message = $request -> message;
-        
+        $data -> user_id = auth() -> user() -> id;
+        $data -> message = $request -> message;
+
         if(request('image')){
             $original = request() -> file("image") -> getClientoriginalName();
             $name = date("Ymd_His")."_".$original;
-            // $message -> image_name = $name;
             request() -> file("image") -> move("storage/images", $name);
-            $message -> image_name = $name;
+            $data -> image_name = $name;
         }
+         
+        return redirect()->route('checkqr')->with('data', $data);
+    }
 
+    //QRコードの確認
+    public function checkqr(Request $request)
+    {
+        $data = $request->session()->get('data');
+        return view('message.check_qr', compact('data'));
+    }
+    
+    public function store(MessageRequest $request)
+    {        
+        $message = new Message();
+
+        $message -> user_id = auth() -> user() -> id;
+        $message -> message = $request -> message;    
+        $message -> image_name = $request->image_name;
+        
         $message -> save();
 
-        //メール送信を書く
-
-
-        return redirect(route("checkqr"));
+        return view("mailcomplete");
     }
     
     public function show($id)

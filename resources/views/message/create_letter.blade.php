@@ -24,7 +24,7 @@
     </nav>
 <!-- メイン -->
     <div class="h-full text-center">
-        <form class="mb-6 mt-20" action="{{ route('message.store') }}" method="POST" enctype="multipart/form-data">
+        <form class="mb-6 mt-20" action="{{ route('presentation') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <p class="font-bold mt-50 text-gray-500" style="font-size:24px;">
                 お世話になった先生へ<br>メッセージを送りましょう。
