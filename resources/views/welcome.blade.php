@@ -50,7 +50,6 @@
                     <a href="{{ route('login2') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">先生はこちらから（先生用ログイン）</a>
                 </div>
             @endif
-            <!-- <button class="shadow-lg bg-orange-500 shadow-orange-500/50 text-white rounded px-2 py-1">メッセージを送る</button> -->
             <button class="shadow-lg bg-orange-500 shadow-orange-500/50 text-white rounded-full border-4 border-gray-300 px-4 py-2 text-xl w-64 h-12 font-bold"><h2><a href="{{ route('login') }}">メッセージを送る</a></h2></button>
         </div>
 

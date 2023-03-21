@@ -10,7 +10,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-orange-50">
+<body class="bg-yellow-50">
     <!-- ヘッダー -->
     <nav class="w-full bg-gray-800 h-20 shadow-lg">
         <div class="flex">
@@ -25,7 +25,7 @@
     </nav>
 <!-- メイン -->
     <div class="h-full text-center">
-        <form class="mb-6 mt-20" action="{{ route('responseteach.store') }}" method="POST" enctype="multipart/form-data">
+        <form class="mb-6 mt-20" action="{{ route('resteach.presentation') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <p class="font-bold mt-50 text-gray-500" style="font-size:24px;">
                 {{ $data -> user -> name }}さんへの返信を作成しましょう。

@@ -10,7 +10,7 @@
     <!-- <link href="https://cdn.tailwindcss.com" rel="stylesheet"> -->
 </head>
 
-<body class="w-full h-full bg-orange-50">
+<body class="w-full h-full bg-yellow-50">
     <!-- ヘッダー -->
     <nav class="w-full bg-gray-800 h-20 shadow-lg">
         <div class="flex">
@@ -28,18 +28,18 @@
                 <div class="flex justify-end text-center mt-4">
                     <a href="#" class="flex items-center font-semibold text-white shadow-sm mr-5" >出したメッセージ一覧
                     </a>
-                    <a href="{{ route('message.create') }}"
+                    <!-- <a href="{{ route('message.create') }}" 
                                 class="shadow-lg bg-orange-500 shadow-orange-500/50 text-white rounded-full border-4 border-gray-300 px-4 py-2 text-xl w-50 h-12 font-bold mr-20">
                                 メッセージを書く
-                    </a>
+                    </a> -->
                 </div>
             </div>
         </div>
     </nav>
     <!-- body -->
-    <section class="w-80% h-screen bg-orange-50">
+    <section class="w-80% h-screen bg-sand-50">
         <div class="mx-4 pt-5 flex justify-center text-gray-400" style="font-size: 48px;">
-            {{ Auth::user()->name }}のMy Page
+            {{ Auth::user()->name }}先生のMy Page
         </div>
 
         <div class="flex flex-wrap justify-center mx-auto mb-4">

@@ -54,8 +54,9 @@ Route::get('/mypageteach', 'App\Http\Controllers\ResponseteachController@mypaget
 Route::resource('responseteach', ResponseteachController::class);
 
 //response check（先生から）
-Route::get('/checkresteach', 'App\Http\Controllers\ResponseteachController@checkresteach')->name('checkresteach');
+Route::get('/checkresteach', 'App\Http\Controllers\ResponseteachController@checkres')->name('checkresteach');
 
+Route::post('/responseteach/presentation', 'App\Http\Controllers\ResponseteachController@presentation')->name('resteach.presentation');
 //mail配信
 Route::post('/mail/send', [MailController::class, 'send']) -> name('mail.send');
 

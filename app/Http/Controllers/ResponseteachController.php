@@ -4,24 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Validator;
-use App\Models\Responseteach;
+use App\Models\Response;
 use App\Models\Message;
 use App\Models\User;
+use SendGrid;
+use SendGrid\Mail\Mail;
+
+
+
 
 class ResponseteachController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
@@ -32,23 +27,61 @@ class ResponseteachController extends Controller
         return view('responseteach.mypage_teacher', ['data' => $data]);
     }
 
-     //responseを作成（先生から）
+    public function index()
+    {
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    //responseを作成
     public function create(Request $request)
     {
         $data = json_decode($request->input('message'));
-        // dd($data);
+// dd($data);
         return response()->view('responseteach.create_responseteach', ['data' => $data]);
     }
 
-    //responseをcheck（先生から）
-    public function checkresteach()
+    public function presentation(Request $request)
     {
-        $latestRecord = Message::latest('updated_at')->first();
-        // dd($latestRecord);
-        return response()->view('responseteach.check_responseteach', ['latestRecord' => $latestRecord]);
-        // return response()->view('responseteach.check_responseteach');
-    }
+        $inputs = $request -> validate([
+            "message" => 'required',
+            "image_name"=> 'image|max:1024'
+        ]);
+        
+        // dd($request);
 
+        $data = new Message();
+
+        $data -> user_id = auth() -> user() -> id;
+        $data -> message = $request -> message;
+        $data -> send_to = $request -> send_to;
+// dd($data->send_to);
+        if(request('image')){
+            $original = request() -> file("image") -> getClientoriginalName();
+            $name = date("Ymd_His")."_".$original;
+            request() -> file("image") -> move("storage/images", $name);
+            $data -> image_name = $name;
+        }
+         
+        return redirect()->route('checkresteach')->with('data', $data);
+    }
+    //responseをcheck
+    public function checkres(Request $request)
+    {
+        
+        $data = $request->session()->get('data');
+        return view('responseteach.check_responseteach', compact('data'));
+        
+        // $latestRecord = Message::latest('updated_at')->first();
+
+        // return response()->view('response.check_response', ['latestRecord' => $latestRecord]);
+    //  dd($laltestRecord);   
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -58,33 +91,53 @@ class ResponseteachController extends Controller
      */
     public function store(Request $request)
     {
-         $inputs = $request -> validate([
-            "message" => 'required',
-            "image_name"=> 'image|max:1024'
-        ]);
+        // $inputs = $request -> validate([
+        //     "message" => 'required',
+        //     "image_name"=> 'image|max:1024'
+        // ]);
         
-        // dd($request);
+        // dd($request -> send_to);
 
         $message = new Message();
 
         $message -> user_id = auth() -> user() -> id;
         $message -> message = $request -> message;
         $message -> send_to = $request -> send_to;
-        
-        if(request('image')){
-            $original = request() -> file("image") -> getClientoriginalName();
-            $name = date("Ymd_His")."_".$original;
-            // $message -> image_name = $name;
-            request() -> file("image") -> move("storage/images", $name);
-            $message -> image_name = $name;
-        }
-    // dd($message);
+        $message -> image_name = $request->image_name;
+        // if(request('image')){
+        //     $original = request() -> file("image") -> getClientoriginalName();
+        //     $name = date("Ymd_His")."_".$original;
+        //     request() -> file("image") -> move("storage/images", $name);
+        //     $message -> image_name = $name;
+        // }
+    // dd($message->image_name);
         $message -> save();
 
-        
+         $user = User::find($request -> send_to);
+            $address = $user->email;
+                // dd($address);
+            //SendGrid
+            $email = new Mail();
+            $email->setFrom('taisuke.m.lotus.elise@gmail.com', '教員へのメッセージ');
+            $email->setSubject("生徒・教員からのメッセージ");
+            $email->addTo($address);
+    // dd($email);
+            $fixedContent
+                = "{$user->name} 先生からメッセージが届いてます。下のurlからログインして確認しましょう。
+                https://gsacademy-fdev05.sakura.ne.jp/project/";
+            $email->addContent("text/plain", $fixedContent);
+    // dd($email);
+            $apiKey = getenv('SENDGRID_API_KEY');
+            $sendGrid = new \SendGrid($apiKey);
+            // $sendgrid = new SendGrid(env('SENDGRID_API_KEY'));
+    // dd($sendGrid);
+            $response = $sendGrid->send($email);
+// dd($message);
+            
+        return view('mail.mailcompleteteach', compact('request', 'user'));
         //メール送信を書く
 
-        return redirect(route("checkresteach"));
+        // return redirect(route(""));
     }
 
     /**

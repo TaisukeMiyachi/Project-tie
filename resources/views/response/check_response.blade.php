@@ -7,12 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>check_response.blade.php</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-    function submitForms() {
-        document.getElementById("response-form").submit();
-        document.getElementById("mail-form").submit();
-    }
-    </script>
+    
 </head>
 
 <body class="bg-orange-50">
@@ -43,20 +38,22 @@
                     <input type="hidden" name="message" value="{{ $data->message }}">
                     <input type="hidden" name="image_name" value="{{ $data->image_name }}">                    
                     <input type="hidden" name="send_to" value="{{ $data->send_to }}">
-                    <x-primary-button class="ml-3">
-                        {{ __('送る') }}
-                    </x-primary-button>
                 </form>
-                <form id="mail-form" action="{{ route('mail.send') }}" method="POST">
+                <!-- <form id="mail-form" action="{{ route('mail.send') }}" method="POST">
                     @csrf
                     <input type="hidden" name="message" value="{{ $data->message }}">
                     <input type="hidden" name="image_name" value="{{ $data->image_name }}">                    
                     <input type="hidden" name="send_to" value="{{ $data->send_to }}">
-                    <x-primary-button class="ml-3" onclick="submitForms();">
-                        {{ __('送信') }}
-                    </x-primary-button>
-                </form>
-            </div>
+                </form> -->
+                <button type="submit" class="ml-3" onclick="submitForms();">{{ __('送信') }}</button>
+                </div>
+
+                <script>
+                function submitForms() {
+                    document.getElementById("response-form").submit();
+                    // document.getElementById("mail-form").submit();
+                }
+                </script>
             
         </div>
 </body>

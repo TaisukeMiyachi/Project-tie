@@ -9,13 +9,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-orange-50">
+<body class="bg-yellow-50">
     <div class="container mx-auto px-4 py-24">
         <h1 class="text-4xl font-bold mb-8">メッセージ送信完了</h1>
         <p class="text-xl">メッセージを送りました。</p>
+        <p>{{$user->id}}</p>
         <div class="mt-8">
-            <a href="{{ route('message.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                新しいメッセージを送る
+            <a href="{{ route('mypageteach') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                My Pageへ戻る
             </a>
         </div>
     </div>
