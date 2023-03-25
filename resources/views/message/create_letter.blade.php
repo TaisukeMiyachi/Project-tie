@@ -5,15 +5,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>create_response.blade.php</title>
+    <title>create_letter</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500&display=swap" rel="stylesheet">
 </head>
+<style>
+    nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 9999;
+    }
+    div,body {
+        font-family: 'M PLUS Rounded 1c', sans-serif;
+    }
+</style>
 
 <body class="bg-orange-50">
     <!-- ヘッダー -->
-    <nav class="w-full bg-gray-800 h-20 shadow-lg">
-        <div class="flex">
-            <div id="header-left" class="w-1/3 flex start flex items-center text-white mt-7 ml-20 font-bold">
+    <nav class="w-full bg-white shadow-lg">
+        <div class="flex items-center  h-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-">
+            <div id="header-left" class="w-1/3 flex start flex items-center text-gray-500 mt-2  font-bold">
                  <a href="{{ route('mypagestu') }}">
                     @csrf
                     @method('POST')
@@ -23,15 +38,24 @@
         </div>
     </nav>
 <!-- メイン -->
-    <div class="h-full text-center">
+    <div class="mt-40 h-full text-center">
         <form class="mb-6 mt-20" action="{{ route('presentation') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <p class="font-bold mt-50 text-gray-500" style="font-size:24px;">
+            
+            <div class="flex justify-center mt-10">
+                <div class="w-20 mr-3">
+                    <img src="{{ asset('images/12920_paint.png') }}" alt="">
+                </div>
+                <p class="font-bold mt-50 text-gray-500" style="font-size:24px;">
                 お世話になった先生へ<br>メッセージを送りましょう。
             </p>
-            <div class="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+                <div class="w-20 ml-3">
+                    <img src="{{ asset('images/12929_paint.png') }}" alt="">
+                </div>
+            </div>
+            <div class="mx-auto max-w-2xl mt-10  px-4  sm:px-6 lg:max-w-7xl lg:px-8">
                 <label class=" w-full h-full block flex justify-center mb-10">
-                    <textarea class="resize-none w-40 md:w-1/2 h-70 md:h-64 block rounded-md shadow-md focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="message" id="" cols="30" rows="10" placeholder="手紙を書いてください" type="text" style="font-size:20px">{{ old('message') }}</textarea>
+                    <textarea class="px-4 py-4 resize-none w-40 md:w-1/2 h-70 md:h-64 block rounded-md shadow-md focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="message" id="" cols="30" rows="10" placeholder="メッセージを書いてください" type="text" style="font-size:20px">{{ old('message') }}</textarea>
                     <!-- <textarea class="w-30 h-30 mt-1 block rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" rows="3" placeholder="手紙を書いてください" type="text" name="message">{{ old('message') }}
                         {{ old('message') }}
                     </textarea> -->

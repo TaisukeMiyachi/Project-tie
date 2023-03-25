@@ -13,11 +13,21 @@ class MessageController extends Controller
 {
     
     //My page（生徒用）
-    public function mypagestu()
+   public function mypagestu()
     {
         $user_id = auth()->user()->id;
-        $data = Message::with('user')->where('send_to', $user_id)->get();   
-        return view('message.mypage_student', ['data' => $data]);
+        $type = User::where('id', $user_id)->value('usertype');
+
+        // dd($type);
+        if($type == 1){
+            $data = Message::with('user')->where('send_to', $user_id)->orderBy('created_at', 'desc')->get();   
+            return view('message.mypage_student', ['data' => $data]);
+        } elseif ($type == 2) {
+            $data = Message::with('user')->where('send_to', $user_id)->orderBy('created_at', 'desc')->get(); 
+            return view('responseteach.mypage_teacher', ['data' => $data]);
+        } else {
+            return abort(403);
+        }
     }
 
     //messageを作成
@@ -77,7 +87,7 @@ class MessageController extends Controller
         
         $message -> save();
 
-        return view("mailcomplete");
+        return view("mail.mailcomplete");
     }
     
     public function show($id)

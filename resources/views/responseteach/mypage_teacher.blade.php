@@ -7,9 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>mypage_student.blade.php</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
     <!-- <link href="https://cdn.tailwindcss.com" rel="stylesheet"> -->
-</head>
 
+</head>
+<style>
+    div {
+        font-family: 'M PLUS Rounded 1c', sans-serif;
+    }
+    #name {
+        font-family: 'M PLUS Rounded 1c', sans-serif;
+    }
+</style>
 <body class="w-full h-full bg-yellow-50">
     <!-- ヘッダー -->
     <nav class="w-full bg-gray-800 h-20 shadow-lg">
@@ -45,7 +56,7 @@
         <div class="flex flex-wrap justify-center mx-auto mb-4">
          @foreach ($data as $message)
             <div class="mt-5 w-full md:w-1/3 lg:w-1/3 p-4 letter relative">
-                <div class="absolute top-0 text-2xl font-serif leading-tight">{{ $message->user->name }}さんから</div>
+                <div id= "name" class="absolute top-0 text-2xl font-serif leading-tight">{{ $message->user->name }}さんから</div>
                  @if($message->image_name)
                         <img src="{{ asset('storage/images/'.$message->image_name)}}" class="mx-auto" style="height:300px;">
                     @endif   

@@ -35,7 +35,9 @@ class ResponseController extends Controller
     public function create(Request $request)
     {
         $data = json_decode($request->input('message'));
+        // dd($data);
         return response()->view('response.create_response', ['data' => $data]);
+        
     }
 
     public function presentation(Request $request)
@@ -49,7 +51,8 @@ class ResponseController extends Controller
         $data -> user_id = auth() -> user() -> id;
         $data -> message = $request -> message;
         $data -> send_to = $request -> send_to;
-
+        $data -> name    = $request -> name;
+// dd($request);
         if(request('image')){
             $original = request() -> file("image") -> getClientoriginalName();
             $name = date("Ymd_His")."_".$original;
@@ -63,6 +66,7 @@ class ResponseController extends Controller
     public function checkres(Request $request)
     {    
         $data = $request->session()->get('data');
+        // dd($data);
         return view('response.check_response', compact('data'));   
     }
 
@@ -74,11 +78,6 @@ class ResponseController extends Controller
      */
     public function store(Request $request)
     {
-        // $inputs = $request -> validate([
-        //     "message" => 'required',
-        //     "image_name"=> 'image|max:1024'
-        // ]);
-
         $message = new Message();
         $message -> user_id = auth() -> user() -> id;
         $message -> message = $request -> message;
@@ -86,8 +85,9 @@ class ResponseController extends Controller
         $message -> image_name = $request->image_name;
         
         $message -> save();
-
+// dd($message);
          $user = User::find($request -> send_to);
+        //  dd($user);
         $address = $user->email;
          
         $email = new Mail();
