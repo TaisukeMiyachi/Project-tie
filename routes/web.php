@@ -6,7 +6,7 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ResponseController;
 use App\Http\Controllers\ResponseteachController;
 use App\Http\Controllers\MailController;
-
+use App\Http\Controllers\QRCodeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,6 +22,10 @@ use App\Http\Controllers\MailController;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::POST('/', function(){
+    return view('messageqr');
 });
 
 //My page(生徒用)
@@ -59,6 +63,9 @@ Route::get('/checkresteach', 'App\Http\Controllers\ResponseteachController@check
 Route::post('/responseteach/presentation', 'App\Http\Controllers\ResponseteachController@presentation')->name('resteach.presentation');
 //mail配信
 Route::post('/mail/send', [MailController::class, 'send']) -> name('mail.send');
+
+//QRコード
+Route::get('/qrcode/{invite_code}', [QRCodeController::class, 'generateQRCode']);
 
 //ログイン
 Route::get('/dashboard', function () {

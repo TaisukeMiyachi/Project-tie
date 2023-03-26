@@ -31,9 +31,11 @@ class MessageController extends Controller
     }
 
     //messageを作成
-    public function create()
+    public function create(Request $request)
     {
-        return view('message.create_letter');
+        $id = $request->input("id");
+        // dd($id);
+        return view('message.create_letter', ['id' => $id]);
     }
 
     //messageの確認
@@ -55,11 +57,20 @@ class MessageController extends Controller
             "image_name"=> 'image|max:1024'
         ]);
         
+        // dd($request->id);
+        $id = $request->id;
+// dd($id);
+        $user = User::find($id);
+        $name = $user->name;
+// dd($name);
         $data = new Message();
-
         $data -> user_id = auth() -> user() -> id;
         $data -> message = $request -> message;
-
+        $data -> send_to = $request -> send_to;
+        $data -> name = $name;
+        
+        // dd($data);
+        // dd($data);
         if(request('image')){
             $original = request() -> file("image") -> getClientoriginalName();
             $name = date("Ymd_His")."_".$original;

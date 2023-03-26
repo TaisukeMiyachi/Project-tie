@@ -52,7 +52,7 @@ class ResponseController extends Controller
         $data -> message = $request -> message;
         $data -> send_to = $request -> send_to;
         $data -> name    = $request -> name;
-// dd($request);
+// dd($data -> name);
         if(request('image')){
             $original = request() -> file("image") -> getClientoriginalName();
             $name = date("Ymd_His")."_".$original;
@@ -85,7 +85,7 @@ class ResponseController extends Controller
         $message -> image_name = $request->image_name;
         
         $message -> save();
-// dd($message);
+// dd(auth()->user()->name);
          $user = User::find($request -> send_to);
         //  dd($user);
         $address = $user->email;
@@ -94,9 +94,11 @@ class ResponseController extends Controller
         $email->setFrom('taisuke.m.lotus.elise@gmail.com', '教員へのメッセージ');
         $email->setSubject("生徒・教員からのメッセージ");
         $email->addTo($address);
-    
+
+        $name = auth() -> user() ->name;
+// dd($name);
         $fixedContent
-                = "{$user->name} さんからメッセージが届いてます。下のurlからログインして確認しましょう。
+                = "{$name} さんからメッセージが届いてます。下のurlからログインして確認しましょう。
                 https://gsacademy-fdev05.sakura.ne.jp/project/";
         $email->addContent("text/plain", $fixedContent);
     

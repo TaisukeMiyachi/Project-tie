@@ -48,11 +48,14 @@
                 <div class="ml-4">
                     <a href="#" id="index" class="text-gray-500 hover:text-gray-800 font-medium transition duration-150 ease-in-out">出したメッセージ一覧</a>
                 </div>
-                <div id="message" class="ml-4"> 
-                    <a href="{{ route('message.create') }}" class="shadow-lg bg-orange-500 hover:bg-orange-600 shadow-orange-500/50 text-white rounded-full  px-4 py-2 text-xl w-64 h-12 font-bold">
+                <form id="message" class="ml-4" action="{{ route('message.create') }}" method="GET"> 
+                    @foreach($data as $message)
+                        <input type="hidden" name="id" value="{{ $message->send_to }}" />
+                    @endforeach
+                    <button type="submit" class="shadow-lg bg-orange-500 hover:bg-orange-600 shadow-orange-500/50 text-white rounded-full  px-4 py-2 text-xl w-64 h-12 font-bold">
                         メッセージを書く
-                    </a>
-                </div>
+                    </button>
+                </form>
             </div>
         </div>
     </nav>
@@ -78,8 +81,8 @@
             @endif
         </div>
             <div class="h-48 md:h-56 lg:h-64 bg-white bg-opacity-80 flex items-start justify-start p-4 md:p-6 lg:p-8" style="border-radius: 10px;">
-    <p id="message" class="text-lg font-serif leading-tight md:text-xl">{{ $message->message }}</p>
-</div>
+                <p id="message" class="text-lg font-serif leading-tight md:text-xl">{{ $message->message }}</p>
+            </div>
             <form method="GET" action="{{ route('response.create') }}">
                 @csrf
                 <div class="flex justify-center">

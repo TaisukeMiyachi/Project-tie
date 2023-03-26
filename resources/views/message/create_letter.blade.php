@@ -41,7 +41,7 @@
     <div class="mt-40 h-full text-center">
         <form class="mb-6 mt-20" action="{{ route('presentation') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            
+            <input type="hidden" name="id" value="{{$id}}" />
             <div class="flex justify-center mt-10">
                 <div class="w-20 mr-3">
                     <img src="{{ asset('images/12920_paint.png') }}" alt="">
