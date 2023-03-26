@@ -7,6 +7,7 @@ use App\Http\Controllers\ResponseController;
 use App\Http\Controllers\ResponseteachController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\QRCodeController;
+use App\Models\Message;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,9 +25,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::POST('/', function(){
-    return view('messageqr');
-});
+Route::get('/messageqr/{id}', function ($id) {
+    // dd($id);
+    // $idに対応するメッセージを取得
+    $message = Message::find($id);
+    
+    // ビューに渡すデータを設定
+    $data = ['message' => $message];
+    // dd($data['message']->id);
+    // ビューを表示
+    return view('messageqr', $data);
+})->name('messageqr');
+
+
 
 //My page(生徒用)
 Route::get('/mypagestu', 'App\Http\Controllers\MessageController@mypagestu')->name('mypagestu');

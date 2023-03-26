@@ -95,11 +95,16 @@ class MessageController extends Controller
         $message -> user_id = auth() -> user() -> id;
         $message -> message = $request -> message;    
         $message -> image_name = $request->image_name;
-        
+
         $message -> save();
 
-        return view("mail.mailcomplete");
+        $lastId = Message::latest()->first()->id;
+
+        // dd($lastId);
+        return redirect()->route('messageqr', ['id' => $lastId]);
+
     }
+    
     
     public function show($id)
     {
