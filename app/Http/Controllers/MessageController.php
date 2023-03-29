@@ -57,11 +57,8 @@ class MessageController extends Controller
             "message" => 'required',
             "image_name"=> 'image|max:1024'
         ]);
-        
-        $id = $request->id;
-
-        $user = User::find($id);
-        $name = $user->name;
+            
+        $name = auth() -> user() -> name;
 
         $data = new Message();
         $data -> user_id = auth() -> user() -> id;
