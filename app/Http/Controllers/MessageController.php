@@ -97,7 +97,7 @@ class MessageController extends Controller
         $lastId = Message::latest()->first()->id;
 
         $url = env('APP_URL')."/messageqr/{$lastId}"; // QRコードに表示するURL
-dd($url);
+
         $userName = auth()->user()->name; // ログインユーザーの名前を取得
 
         return view('qrcode', [
