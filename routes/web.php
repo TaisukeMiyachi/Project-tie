@@ -8,6 +8,8 @@ use App\Http\Controllers\ResponseteachController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\QRCodeController;
 use App\Models\Message;
+use App\Models\User;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,15 +28,21 @@ Route::get('/', function () {
 });
 
 Route::get('/messageqr/{id}', function ($id) {
-    // dd($id);
-    // $idに対応するメッセージを取得
-    $message = Message::find($id);
-    
-    // ビューに渡すデータを設定
-    $data = ['message' => $message];
-    // dd($data['message']->id);
-    // ビューを表示
-    return view('messageqr', $data);
+ $message = Message::find($id);
+
+// dd($id);
+$user_id = $message->user_id;
+$user = User::where('id', $user_id)->first();
+$user_name = $user->name;
+
+$data = [
+    'message' => $message,
+    'user_name' => $user_name,
+    'id' => $id,
+];
+// dd($data);
+
+return view('messageqr', $data);
 })->name('messageqr');
 
 
@@ -77,6 +85,8 @@ Route::post('/mail/send', [MailController::class, 'send']) -> name('mail.send');
 
 //QRコード
 Route::get('/qrcode/{invite_code}', [QRCodeController::class, 'generateQRCode']);
+
+
 
 //ログイン
 Route::get('/dashboard', function () {

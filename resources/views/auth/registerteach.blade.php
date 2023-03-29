@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register2') }}">
+    <form method="POST" action="{{ route('register2', ['id' => $id]) }}">
         @csrf
 
         <!-- Name -->
@@ -18,6 +18,7 @@
 
         <!-- Password -->
         <div class="mt-4">
+            <!-- {{$id}}がbladeテンプレートに渡されていることを確認しましょう -->
             <x-input-label for="password" :value="__('Password')" />
 
             <x-text-input id="password" class="block mt-1 w-full"
@@ -39,19 +40,8 @@
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
-        <div class="form-group row">
-            <label for="invite_code" class="col-md-4 col-form-label text-md-right">{{ __('Invite Code') }}</label>
-
-            <div class="col-md-6">
-                <input id="invite_code" type="text" class="form-control @error('invite_code') is-invalid @enderror" name="invite_code" value="{{ request()->get('invite_code') }}" required>
-
-                @error('invite_code')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-        </div>
+        //messageのid
+        <input type="hidden" name="id" value="{{ $id }}">
 
 
         <div class="flex items-center justify-end mt-4">

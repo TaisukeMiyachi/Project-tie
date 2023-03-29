@@ -8,6 +8,7 @@ use App\Models\Message;
 use App\Models\User;
 use App\Http\Requests\MessageRequest;
 use Auth;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class MessageController extends Controller
 {
@@ -57,20 +58,17 @@ class MessageController extends Controller
             "image_name"=> 'image|max:1024'
         ]);
         
-        // dd($request->id);
         $id = $request->id;
-// dd($id);
+
         $user = User::find($id);
         $name = $user->name;
-// dd($name);
+
         $data = new Message();
         $data -> user_id = auth() -> user() -> id;
         $data -> message = $request -> message;
         $data -> send_to = $request -> send_to;
         $data -> name = $name;
-        
-        // dd($data);
-        // dd($data);
+       
         if(request('image')){
             $original = request() -> file("image") -> getClientoriginalName();
             $name = date("Ymd_His")."_".$original;
@@ -88,21 +86,27 @@ class MessageController extends Controller
         return view('message.check_qr', compact('data'));
     }
     
+    //dataを保存して、messageのIDを$lastIdとして取得
     public function store(MessageRequest $request)
     {        
         $message = new Message();
 
-        $message -> user_id = auth() -> user() -> id;
-        $message -> message = $request -> message;    
-        $message -> image_name = $request->image_name;
+        $message->user_id = auth()->user()->id;
+        $message->message = $request->message;
+        $message->image_name = $request->image_name;
 
-        $message -> save();
+        $message->save();
 
         $lastId = Message::latest()->first()->id;
 
-        // dd($lastId);
-        return redirect()->route('messageqr', ['id' => $lastId]);
+        $url = "localhost/messageqr/{$lastId}"; // QRコードに表示するURL
 
+        $userName = auth()->user()->name; // ログインユーザーの名前を取得
+
+        return view('qrcode', [
+            'qrcode' => QrCode::size(300)->generate($url),
+            'userName' => $userName, // 取得したユーザー名をビューに渡す
+        ]);
     }
     
     

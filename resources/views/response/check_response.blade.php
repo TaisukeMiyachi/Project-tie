@@ -33,10 +33,10 @@
     <nav class="w-full bg-white shadow-lg">
         <div class="flex items-center  h-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-">
             <div id="header-left" class="w-1/3 flex start flex items-center text-gray-500 mt-2  font-bold">
-                 <a href="{{ route('message.create') }}">
+                 <a href="{{ route('mypagestu') }}">
                     @csrf
                     @method('POST')
-                    < 戻る check_res</a>
+                    < 戻る</a>
             </div>
         </div>
     </nav>
@@ -55,37 +55,30 @@
                 </div>
                 @endif
             </div>
-                <div id="message" class="h-48 md:h-56 lg:h-64 bg-white bg-opacity-80 flex items-start justify-start p-4 md:p-6 lg:p-8" style="border-radius: 10px;">
+            <div id="message" class="h-48 md:h-56 lg:h-64 bg-white bg-opacity-80 flex items-start justify-start p-4 md:p-6 lg:p-8" style="border-radius: 10px;">
                 <p id="message" class="text-lg font-serif leading-tight md:text-xl">{{ $data->message }}</p>
             </div>
         </section>
 
         
         <div class="flex items-center justify-center mt-4">
-                <form id="response-form" action="{{ route('response.store') }}" method="POST">
-                    @csrf
-                    <input type="hidden" name="message" value="{{ $data->message }}">
-                    <input type="hidden" name="image_name" value="{{ $data->image_name }}">                    
-                    <input type="hidden" name="send_to" value="{{ $data->send_to }}">
+            <form id="response-form" action="{{ route('response.store') }}" method="POST">
+                @csrf
+                <input type="hidden" name="message" value="{{ $data->message }}">
+                <input type="hidden" name="image_name" value="{{ $data->image_name }}">                    
+                <input type="hidden" name="send_to" value="{{ $data->send_to }}">
+            
+                <button type="submit" class="ml-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                {{ __('送信') }}
+                </button>
                 </form>
-                <!-- <form id="mail-form" action="{{ route('mail.send') }}" method="POST">
-                    @csrf
-                    <input type="hidden" name="message" value="{{ $data->message }}">
-                    <input type="hidden" name="image_name" value="{{ $data->image_name }}">                    
-                    <input type="hidden" name="send_to" value="{{ $data->send_to }}">
-                </form> -->
-                <button type="submit" class="ml-3" onclick="submitForms();">{{ __('送信') }}</button>
-                </div>
+        </div>
 
                 <script>
                 function submitForms() {
                     document.getElementById("response-form").submit();
-                    // document.getElementById("mail-form").submit();
                 }
-                </script>
-            
-            
-        </div>
+                </script>   
 </body>
 </html>
 
@@ -94,40 +87,3 @@
 
 
 
-
-        <!-- メイン -->
-        @csrf
-        <div class="mx-auto max-w-2xl px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-            <div class="bg-cover bg-center h-screen" style="background-image: url('/images/paper-47838_1280.png')">
-                {{ $data->message }}
-            </div>
-
-            @if($data->image_name)
-                <img src="{{ asset('storage/images/'.$data->image_name)}}" class="mx-auto" style="height:300px;">
-            @endif
-            <div class="flex items-center justify-center mt-4">
-                <form id="response-form" action="{{ route('response.store') }}" method="POST">
-                    @csrf
-                    <input type="hidden" name="message" value="{{ $data->message }}">
-                    <input type="hidden" name="image_name" value="{{ $data->image_name }}">                    
-                    <input type="hidden" name="send_to" value="{{ $data->send_to }}">
-                </form>
-                <!-- <form id="mail-form" action="{{ route('mail.send') }}" method="POST">
-                    @csrf
-                    <input type="hidden" name="message" value="{{ $data->message }}">
-                    <input type="hidden" name="image_name" value="{{ $data->image_name }}">                    
-                    <input type="hidden" name="send_to" value="{{ $data->send_to }}">
-                </form> -->
-                <button type="submit" class="ml-3" onclick="submitForms();">{{ __('送信') }}</button>
-                </div>
-
-                <script>
-                function submitForms() {
-                    document.getElementById("response-form").submit();
-                    // document.getElementById("mail-form").submit();
-                }
-                </script>
-            
-        </div>
-</body>
-</html>

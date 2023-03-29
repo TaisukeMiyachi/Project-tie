@@ -7,9 +7,9 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class QRCodeController extends Controller
 {
-    public function generateQRCode($message_id)
-        {
-            $url = route('register', ['message_id' => $message_id]);
-            return QrCode::size(200)->generate($url);
-        }
+    public function generateQRCode($invite_code)
+    {
+        $url = route('register', ['invite_code' => $invite_code]);
+        return QrCode::size(200)->generate($url);
+    }
 }
