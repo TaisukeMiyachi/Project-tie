@@ -49,7 +49,7 @@
                     <img src="{{ asset('images/12920_paint.png') }}" alt="">
                 </div>
                 <p class="font-bold mt-50 text-gray-500" style="font-size:24px;">
-                返信を作成しましょう。
+                {{$data->user->name}}先生へ<br>返信を作成しましょう。
             </p>
                 <div class="w-20 ml-3">
                     <img src="{{ asset('images/12929_paint.png') }}" alt="">

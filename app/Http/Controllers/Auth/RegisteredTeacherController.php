@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Message;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -12,15 +13,17 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\DB;
 
 class RegisteredTeacherController extends Controller
 {
     /**
      * Display the registration view.
      */
-    public function create(): View
+    public function create($id): View
     {
-        return view('auth.registerteach');
+        // dd($id);
+        return view('auth.registerteach', compact('id'));
     }
 
     /**
@@ -43,7 +46,19 @@ class RegisteredTeacherController extends Controller
             'usertype' => 2,
         ]);
 
+        // dd($request->id);
+
         event(new Registered($user));
+
+        // usersテーブルから、最後に追加されたレコードのidを取得する
+        $lastid = DB::table('users')->latest('id')->value('id');
+// dd($lastid);
+        // messageテーブルから、idが$request->idであるレコードを取得する
+        $message = Message::where('id', $request->id)->first();
+
+        // send_toカラムを更新する
+        $message->send_to = $lastid;
+        $message->save();
 
         Auth::login($user);
 

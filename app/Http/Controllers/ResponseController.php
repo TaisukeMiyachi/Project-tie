@@ -35,7 +35,7 @@ class ResponseController extends Controller
     public function create(Request $request)
     {
         $data = json_decode($request->input('message'));
-        // dd($data);
+        
         return response()->view('response.create_response', ['data' => $data]);
         
     }
@@ -47,12 +47,13 @@ class ResponseController extends Controller
             "image_name"=> 'image|max:1024'
         ]);
 
+
         $data = new Message();
         $data -> user_id = auth() -> user() -> id;
         $data -> message = $request -> message;
         $data -> send_to = $request -> send_to;
         $data -> name    = $request -> name;
-// dd($data -> name);
+
         if(request('image')){
             $original = request() -> file("image") -> getClientoriginalName();
             $name = date("Ymd_His")."_".$original;
@@ -66,7 +67,6 @@ class ResponseController extends Controller
     public function checkres(Request $request)
     {    
         $data = $request->session()->get('data');
-        // dd($data);
         return view('response.check_response', compact('data'));   
     }
 
@@ -85,9 +85,8 @@ class ResponseController extends Controller
         $message -> image_name = $request->image_name;
         
         $message -> save();
-// dd(auth()->user()->name);
-         $user = User::find($request -> send_to);
-        //  dd($user);
+        
+        $user = User::find($request -> send_to);
         $address = $user->email;
          
         $email = new Mail();
@@ -96,7 +95,7 @@ class ResponseController extends Controller
         $email->addTo($address);
 
         $name = auth() -> user() ->name;
-// dd($name);
+
         $fixedContent
                 = "{$name} さんからメッセージが届いてます。下のurlからログインして確認しましょう。
                 https://gsacademy-fdev05.sakura.ne.jp/project/";

@@ -67,16 +67,16 @@
         <div class="relative flex items-center justify-center min-h-screen  sm:items-center py-4 sm:pt-0">
             <!-- @if (Route::has('login')) -->
                 <!-- <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block"> -->
-                    @auth
+                    <!-- @auth
                         <a href="{{ url('/mypagestu') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Mypage</a>
-                    @else
+                    @else -->
                         <a href="{{ route('login') }}" class="login-btn text-aline-center shadow-lg  text-gray-400 rounded-full px-4 py-2 text-xl w-64 h-12 font-bold" style="text-align:center;">ログイン</a>
 
                         @if (Route::has('register'))
                             <a href="{{ route('register') }}" class="btn student-btn ml-4 text-sm text-gray-700 dark:text-gray-500">生徒用登録</a>
                         @endif
-                    @endauth
-                    <a href="{{ route('register2') }}" class="ml-4 text-sm btn teacher-btn text-gray-700 dark:text-gray-500">先生用登録</a>
+                    <!-- @endauth -->
+                    
                     <!-- <a href="{{ route('login2') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">先生はこちらから（先生用ログイン）</a> -->
                 <!-- </div> -->
             <!-- @endif -->

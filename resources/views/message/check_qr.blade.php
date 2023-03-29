@@ -24,17 +24,18 @@
     <nav class="w-full bg-white shadow-lg">
         <div class="flex items-center  h-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-">
             <div id="header-left" class="w-1/3 flex start flex items-center text-gray-500 mt-2  font-bold">
-                 <a href="{{ route('message.create') }}">
+                 <a href="{{ route('message.create', ['id' => $data->user_id]) }}">
                     @csrf
                     @method('POST')
-                    < 戻る check_qr</a>
+                    < 戻る</a>
             </div>
         </div>
     </nav>
         <!-- メイン -->
         @csrf
         <div class="mt-20 h-full text-center">
-            <h1 id="name" class="font-bold mt-50 mb-10 text-gray-500" style="font-size:24px;">{{ $data->name }}さんからのメッセージ</h1>
+            <h1 id="name" class="font-bold mt-0 mb-10 text-gray-500" style="font-size:48px;">Web Pigeon</h1>
+            <h1 id="name" class="font-bold mt-50 mb-0 text-gray-500" style="font-size:24px;">{{ $data->name }}さんからのメッセージ</h1>
             <div class="w-50 h-50 flex justify-center">
             @if($data->image_name)
                 <div class="w-50 h-50 flex items-center justify-center">
@@ -57,8 +58,8 @@
                     @csrf
                     <input type="hidden" name="message" value="{{ $data->message }}">
                     <input type="hidden" name="image_name" value="{{ $data->image_name }}">
-                    <x-primary-button class="ml-3">
-                        {{ __('送る') }}
+                    <x-primary-button class="ml-3" style="font-size:24px">
+                        {{ __('QRコードを発行する') }}
                     </x-primary-button>
                 </form>
             </div>

@@ -62,10 +62,10 @@ Route::middleware('auth')->group(function () {
 
 //
 Route::middleware('guest')->group(function () {
-    Route::get('register2', [RegisteredTeacherController::class, 'create'])
+    Route::get('register2/{id}', [RegisteredTeacherController::class, 'create'])
                 ->name('register2');
 
-    Route::post('register2', [RegisteredTeacherController::class, 'store']);
+    Route::post('register2/{id}', [RegisteredTeacherController::class, 'store']);
 
     Route::get('login2', [AuthenticatedteachSessionController::class, 'create'])
                 ->name('login2');

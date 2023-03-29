@@ -28,7 +28,7 @@
     <!-- ヘッダー -->
     <nav class="w-full bg-white shadow-lg">
         <div class="flex items-center  h-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-">
-            <div id="header-left" class="w-1/3 flex start flex items-center text-gray-500 mt-2  font-bold">
+            <div id="header-left" class="w-1/3 flex start flex items-center text-gray-500 hover:text-gray-800 mt-2  font-bold">
                  <a href="{{ route('mypagestu') }}">
                     @csrf
                     @method('POST')
@@ -47,7 +47,7 @@
                     <img src="{{ asset('images/12920_paint.png') }}" alt="">
                 </div>
                 <p class="font-bold mt-50 text-gray-500" style="font-size:24px;">
-                お世話になった先生へ<br>メッセージを送りましょう。
+                お世話になった先生へ<br>メッセージを送りましょう。<br>ぜひ写真も送って近況を知らせてください。
             </p>
                 <div class="w-20 ml-3">
                     <img src="{{ asset('images/12929_paint.png') }}" alt="">
@@ -81,8 +81,8 @@
                     }
                 </script>
                 <div class="flex items-center justify-center mt-4">
-                    <x-primary-button type="submit" class="shadow-lg bg-orange-500 shadow-orange-500/50 text-white rounded-full border-4 border-gray-300 px-4 py-2 text-xl w-50 h-12 font-bold mr-20">
-                        内容を確認する
+                    <x-primary-button type="submit" class="shadow-lg bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white rounded-full border-4 border-gray-300 px-4 py-2 w-50 h-12 font-bold mr-20">
+                        <span class="text-xl">確 認</span>
                     </x-primary-button>
                 </div>
             </div>  

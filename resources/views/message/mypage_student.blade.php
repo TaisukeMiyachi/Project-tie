@@ -25,6 +25,23 @@
     #name,#message,#index {
         font-family: 'M PLUS Rounded 1c', sans-serif;
     }
+    @media (min-width: 640px) {
+  .w-1/2 {
+    width: 48%;
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:w-1/3 {
+    width: 31.33%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:w-1/4 {
+    width: 23%;
+  }
+}
     </style>
 </head>
 
@@ -34,68 +51,64 @@
         <div class="flex items-center justify-between h-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center">
                 <div class="flex-shrink-0">
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <x-responsive-nav-link :href="route('logout')"
-                                onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                            {{ __('Log Out') }}
-                        </x-responsive-nav-link>
+                    @csrf
+                    <a class="text-gray-500 hover:text-gray-800" href="{{ route('logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        {{ __('ログアウト') }}
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                     @csrf
                     </form>
                 </div>
             </div>
-            <div class="flex">
-                <div class="ml-4">
-                    <a href="#" id="index" class="text-gray-500 hover:text-gray-800 font-medium transition duration-150 ease-in-out">出したメッセージ一覧</a>
+            <div class="flex items-center">
+                <div class="text-gray-500 hover:text-gray-800">マイページ</div>
+                    <div class="ml-4">
+                        <a href="#" id="index" class="text-gray-500 hover:text-gray-800 font-medium transition duration-150 ease-in-out">出したメッセージ一覧</a>
+                    </div>
+                    <form id="message" class="ml-4" action="{{ route('message.create') }}" method="GET"> 
+                        @foreach($data as $message)
+                            <input type="hidden" name="id" value="{{ $message->send_to }}" />
+                        @endforeach
+                            <button type="submit" class="shadow-lg bg-orange-500 hover:bg-orange-600 shadow-orange-500/50 text-white rounded-full  px-4 py-2 text-xl w-64 h-12 font-bold">
+                                メッセージを書く
+                            </button>
+                    </form>
                 </div>
-                <form id="message" class="ml-4" action="{{ route('message.create') }}" method="GET"> 
-                    @foreach($data as $message)
-                        <input type="hidden" name="id" value="{{ $message->send_to }}" />
-                    @endforeach
-                    <button type="submit" class="shadow-lg bg-orange-500 hover:bg-orange-600 shadow-orange-500/50 text-white rounded-full  px-4 py-2 text-xl w-64 h-12 font-bold">
-                        メッセージを書く
-                    </button>
-                </form>
             </div>
         </div>
     </nav>
     <!-- body -->
     <section class="w-80% mx-auto my-8 bg-orange-50 shadow-lg rounded-lg">
-        <div id="name" class="mt-30 px-8 pt-40 text-gray-500 text-3xl font-bold text-center font-serif">ようこそ、{{ Auth::user()->name }}さんのマイページへ</div>
-        <div class="px-8 py-6">
-        
-    <div class="flex flex-wrap justify-between max-w-5xl mx-auto mt-10">
-    @foreach ($data as $message)
-    <!-- {{$message -> user_id}} -->
-        <div class="w-full sm:w-1/2 mt-10 mb-10 md:w-1/3 p-2 md:p-3 lg:p-4 letter relative rounded-lg overflow-hidden shadow-lg">
-            <div id="name" class="absolute top-0 text-lg font-serif leading-tight md:text-xl">{{ $message->user->name }}さんから</div>
-                <div class="w-50 h-50 flex justify-center">
-            @if($message->image_name)
-                <div class="w-40 h-40 flex items-center justify-center">
-                    <img src="{{ asset('storage/images/'.$message->image_name)}}" class="mx-auto" style="height:150px; width:150px;" >
+        <div id="name" class="mt-30 px-8 pt-40 text-gray-500 text-3xl font-bold text-center font-serif">{{ Auth::user()->name }}さんへ届いたメッセージ</div>    
+            <div class="flex flex-wrap justify-between max-w-5xl mx-auto mt-10">
+            @foreach ($data as $message)
+                <div class="w-full sm:w-1/2 mt-10 mb-10 md:w-1/3 p-2 md:p-3 lg:p-4 letter relative rounded-lg overflow-hidden shadow-lg">
+                    <div id="name" class="absolute top-0 text-lg font-serif leading-tight md:text-xl">{{ $message->user->name }}さんから</div>
+                        <div class="w-50 h-50 flex justify-center">
+                        @if($message->image_name)
+                            <div class="w-40 h-40 flex items-center justify-center">
+                                <img src="{{ asset('storage/images/'.$message->image_name)}}" class="mx-auto" style="height:150px; width:150px;" >
+                            </div>
+                        @else
+                            <div class="bg-gray-300 flex items-center justify-center" style="height:150px; width:150px;">
+                                <span class="text-gray-500 text-lg md:text-xl" style="text-align: center; line-height: 150px;">noimage</span>
+                            </div>
+                        @endif
+                        </div>
+                <div class="h-48 md:h-56 lg:h-64 bg-white bg-opacity-80 flex items-start justify-start p-4 md:p-6 lg:p-8" style="border-radius: 10px;">
+                    <p id="message" class="text-lg font-serif leading-tight md:text-xl">{{ $message->message }}</p>
                 </div>
-            @else
-                <div class="bg-gray-300 flex items-center justify-center" style="height:150px; width:150px;">
-                    <span class="text-gray-500 text-lg md:text-xl" style="text-align: center; line-height: 150px;">noimage</span>
-                </div>
-            @endif
-        </div>
-            <div class="h-48 md:h-56 lg:h-64 bg-white bg-opacity-80 flex items-start justify-start p-4 md:p-6 lg:p-8" style="border-radius: 10px;">
-                <p id="message" class="text-lg font-serif leading-tight md:text-xl">{{ $message->message }}</p>
+                <form method="GET" action="{{ route('response.create') }}">
+                    @csrf
+                    <div class="flex justify-center">
+                        <input type="hidden" name="message" value="{{ $message }}">
+                        <input type="hidden" name="send_to" value="{{$message -> user_id}}">
+                        <button type="submit" class="px-3 py-2 text-white bg-blue-500 hover:bg-blue-600 rounded-full text-sm md:text-base">返信する</button>
+                    </div>
+                </form>
             </div>
-            <form method="GET" action="{{ route('response.create') }}">
-                @csrf
-                <div class="flex justify-center">
-                    <input type="hidden" name="message" value="{{ $message }}">
-                    <input type="hidden" name="send_to" value="{{$message -> user_id}}">
-
-                    <button type="submit" class="px-3 py-2 text-white bg-blue-500 hover:bg-blue-600 rounded-full text-sm md:text-base">返信する</button>
-                </div>
-            </form>
+            @endforeach
         </div>
-    @endforeach
-</div>
-</div>
-
-</body>
+    </body>
 </html>
