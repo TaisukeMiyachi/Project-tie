@@ -47,37 +47,74 @@
 
 <body class="w-screen bg-orange-50">
     <!-- ヘッダー -->
-    <nav class="w-full bg-white shadow-lg">
-        <div class="flex items-center justify-between h-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center">
-                <div class="flex-shrink-0">
-                    @csrf
-                    <a class="text-gray-500 hover:text-gray-800" href="{{ route('logout') }}"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        {{ __('ログアウト') }}
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
-                     @csrf
-                    </form>
-                </div>
-            </div>
-            <div class="flex items-center">
-                <div class="text-gray-500 hover:text-gray-800">マイページ</div>
-                    <div class="ml-4">
-                        <a href="#" id="index" class="text-gray-500 hover:text-gray-800 font-medium transition duration-150 ease-in-out">出したメッセージ一覧</a>
-                    </div>
-                    <form id="message" class="ml-4" action="{{ route('message.create') }}" method="GET"> 
-                        @foreach($data as $message)
-                            <input type="hidden" name="id" value="{{ $message->send_to }}" />
-                        @endforeach
-                            <button type="submit" class="shadow-lg bg-orange-500 hover:bg-orange-600 shadow-orange-500/50 text-white rounded-full  px-4 py-2 text-xl w-64 h-12 font-bold">
-                                メッセージを書く
-                            </button>
-                    </form>
-                </div>
-            </div>
+    <nav class="bg-white shadow-lg">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <!-- ログアウトボタン -->
+      <div class="flex-shrink-0">
+        @csrf
+        <a class="text-gray-500 hover:text-gray-800" href="{{ route('logout') }}"
+          onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+          {{ __('ログアウト') }}
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+         @csrf
+        </form>
+      </div>
+      <!-- ハンバーガーメニュー -->
+      <div class="flex items-center sm:hidden">
+        <button type="button" class="text-gray-500 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-expanded="false" aria-haspopup="true" onclick="toggleMenu()">
+          <span class="sr-only">メニューを開く</span>
+          <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+      <!-- メインメニュー -->
+      <div class="hidden sm:flex sm:items-center">
+        <div class="text-gray-500 hover:text-gray-800">マイページ</div>
+        <div class="ml-4">
+          <a href="#" id="index" class="text-gray-500 hover:text-gray-800 font-medium transition duration-150 ease-in-out">出したメッセージ一覧</a>
         </div>
-    </nav>
+        <form id="message" class="ml-4" action="{{ route('message.create') }}" method="GET"> 
+          @foreach($data as $message)
+            <input type="hidden" name="id" value="{{ $message->send_to }}" />
+          @endforeach
+          <button type="submit" class="shadow-lg bg-orange-500 hover:bg-orange-600 shadow-orange-500/50 text-white rounded-full px-4 py-2 text-xl w-64 h-12 font-bold">
+            メッセージを書く
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- ハンバーガーメニューのコンテンツ -->
+  <div class="hidden sm:hidden" id="menu">
+    <div class="px-2 pt-2 pb-3 space-y-1">
+      <div class="text-gray-500 hover:text-gray-800">マイページ</div>
+      <a href="#" id="index" class="block text-gray-500 hover:text-gray-800 font-medium</a>
+      <form id="message" action="{{ route('message.create') }}" method="GET"> 
+        @foreach($data as $message)
+          <input type="hidden" name="id" value="{{ $message->send_to }}" />
+        @endforeach
+        <button type="submit" class="block w-full text-left text-gray-500 hover:text-gray-800 font-medium py-2 px-3 rounded-md">
+          メッセージを書く
+        </button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<script>
+  function toggleMenu() {
+    var menu = document.getElementById("menu");
+    if (menu.classList.contains("hidden")) {
+      menu.classList.remove("hidden");
+    } else {
+      menu.classList.add("hidden");
+    }
+  }
+</script>
+
     <!-- body -->
     <section class="w-80% mx-auto my-8 bg-orange-50 shadow-lg rounded-lg">
         <div id="name" class="mt-30 px-8 pt-40 text-gray-500 text-3xl font-bold text-center font-serif">{{ Auth::user()->name }}さんへ届いたメッセージ</div>    

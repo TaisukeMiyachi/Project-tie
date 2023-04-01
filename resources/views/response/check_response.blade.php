@@ -47,7 +47,7 @@
                 <div class="w-50 h-50 flex justify-center">
                 @if($data->image_name)
                 <div class="w-40 h-40 flex items-center justify-center">
-                    <img src="{{ asset('storage/images/'.$data->image_name)}}" class="mx-auto" style="height:150px; width:150px;" >
+                    <img src="{{ asset('storage/images/'.$data->image_name)}}" class="mx-auto" style="height:150px; width:150px; object-fit: contain;" >
                 </div>
                 @else
                 <div class="bg-gray-300 flex items-center justify-center" style="height:150px; width:150px;">
