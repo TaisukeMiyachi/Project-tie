@@ -42,13 +42,13 @@
         <form class="mb-6 mt-20" action="{{ route('presentation') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="id" value="{{$id}}" />
-            <div class="flex justify-center mt-10">
+           <div class="flex justify-center mt-10">
                 <div class="w-20 mr-3">
                     <img src="{{ asset('images/12920_paint.png') }}" alt="">
                 </div>
-                <p class="font-bold mt-50 text-gray-500" style="font-size:24px;">
-                お世話になった先生へ<br>メッセージを送りましょう。<br>ぜひ写真も送って近況を知らせてください。
-            </p>
+                <p class="font-bold mt-3 text-gray-500 text-sm">
+                    お世話になった先生へメッセージを送りましょう。ぜひ写真も送って近況を知らせてください。
+                </p>
                 <div class="w-20 ml-3">
                     <img src="{{ asset('images/12929_paint.png') }}" alt="">
                 </div>
