@@ -77,12 +77,12 @@
           <a href="#" id="index" class="text-gray-500 hover:text-gray-800 font-medium transition duration-150 ease-in-out">出したメッセージ一覧</a>
         </div>
         <form id="message" class="ml-4" action="{{ route('message.create') }}" method="GET"> 
-          @foreach($data as $message)
-            <input type="hidden" name="id" value="{{ $message->send_to }}" />
-          @endforeach
-          <button type="submit" class="shadow-lg bg-orange-500 hover:bg-orange-600 shadow-orange-500/50 text-white rounded-full px-4 py-2 text-xl w-64 h-12 font-bold">
-            メッセージを書く
-          </button>
+            @foreach($data as $message)
+                <input type="hidden" name="id" value="{{ $message->send_to }}" />
+            @endforeach
+            <button type="submit" class="shadow-lg bg-orange-500 hover:bg-orange-600 shadow-orange-500/50 text-white rounded-full px-4 py-2 text-xl w-full sm:w-auto h-12 font-bold">
+                メッセージを書く
+            </button>
         </form>
       </div>
     </div>
