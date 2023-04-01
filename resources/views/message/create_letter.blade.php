@@ -39,50 +39,49 @@
     </nav>
 <!-- メイン -->
     <div class="mt-40 h-full text-center">
-        <form class="mb-6 mt-20" action="{{ route('presentation') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <input type="hidden" name="id" value="{{$id}}" />
-           <div class="flex justify-center mt-10">
-                <div class="w-20 mr-3">
-                    <img src="{{ asset('images/12920_paint.png') }}" alt="">
-                </div>
-                <p class="font-bold mt-3 text-gray-500 text-sm">
-                    お世話になった先生へメッセージを送りましょう。ぜひ写真も送って近況を知らせてください。
-                </p>
-                <div class="w-20 ml-3">
-                    <img src="{{ asset('images/12929_paint.png') }}" alt="">
-                </div>
-            </div>
-            <div class="mx-auto max-w-2xl mt-10 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-                <label class="block mb-10">
-                    <textarea class="px-4 py-4 resize-none w-full md:w-1/2 h-70 md:h-64 block rounded-md shadow-md focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-lg" name="message" id="" cols="30" rows="10" placeholder="メッセージを書いてください" type="text">{{ old('message') }}</textarea>
-                </label>
-                <form class="flex justify-center mt-10">
-                    <input type="file" accept='image/*' name="image" onchange="previewImage(this);">
-                </form>
-                <div class="flex justify-center">
-                    <p>
-                    <img id="preview" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                        style="max-width:200px;">
-                    </p>
-                </div>
-                <x-input-error class="mb-4" :messages="$errors->all()"/>
-                <script>
-                    function previewImage(obj) {
-                    var fileReader = new FileReader();
-                    fileReader.onload = (function () {
-                        document.getElementById('preview').src = fileReader.result;
-                    });
-                    fileReader.readAsDataURL(obj.files[0]);
-                    }
-                </script>
-                <div class="flex items-center justify-center mt-4">
-                    <x-primary-button type="submit" class="shadow-lg bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white rounded-full border-4 border-gray-300 px-4 py-2 w-50 h-12 font-bold">
-                    <span class="text-xl">確 認</span>
-                    </x-primary-button>
-                </div>
-            </div>
-        </form>
+  <form class="mb-6 mt-20" action="{{ route('presentation') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <input type="hidden" name="id" value="{{$id}}" />
+    <div class="sm:flex sm:justify-center sm:items-center">
+      <div class="sm:w-20 sm:mr-3">
+        <img src="{{ asset('images/12920_paint.png') }}" alt="">
+      </div>
+      <h2 class="font-bold mt-3 text-gray-500 text-sm sm:text-lg">
+        お世話になった先生へメッセージを送りましょう。</br>ぜひ写真も送って近況を知らせてください。
+</h2>
+      <div class="sm:w-20 sm:ml-3">
+        <img src="{{ asset('images/12929_paint.png') }}" alt="">
+      </div>
     </div>
+    <div class="mx-auto max-w-2xl mt-10 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+      <label class="block mb-10">
+        <textarea class="px-4 py-4 resize-none w-full md:w-1/2 h-70 md:h-64 block rounded-md shadow-md focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-lg sm:text-sm sm:mx-auto sm:mt-10" name="message" id="" cols="30" rows="10" placeholder="メッセージを書いてください" type="text">{{ old('message') }}</textarea>
+      </label>
+      <form class="flex justify-center sm:mt-10">
+        <input type="file" accept='image/*' name="image" onchange="previewImage(this);">
+      </form>
+      <div class="flex justify-center">
+        <p>
+          <img id="preview" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+            style="max-width:200px;">
+        </p>
+      </div>
+      <x-input-error class="mb-4" :messages="$errors->all()"/>
+      <script>
+        function previewImage(obj) {
+          var fileReader = new FileReader();
+          fileReader.onload = (function () {
+            document.getElementById('preview').src = fileReader.result;
+          });
+          fileReader.readAsDataURL(obj.files[0]);
+        }
+      </script>
+      <div class="flex items-center justify-center mt-4">
+  <x-primary-button type="submit" class="shadow-lg bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white rounded-full border-4 border-gray-300 px-4 py-2 w-50 h-12 font-bold">
+    <span class="text-xl">確 認</span>
+  </x-primary-button>
+</div>
+    </form>
+  </div>
 </body>
 </html>
