@@ -75,12 +75,12 @@
         <div id="name" class="mt-30 px-8 pt-40 text-gray-500 text-3xl font-bold text-center font-serif">{{ Auth::user()->name }}先生へ届いたメッセージ</div>    
             <div class="flex flex-wrap justify-between max-w-5xl mx-auto mt-10">
             @foreach ($data as $message)
-                <div class="w-full sm:w-1/2 mt-10 mb-10 md:w-1/3 p-2 md:p-3 lg:p-4 letter relative rounded-lg overflow-hidden shadow-lg">
+                <div class="w-full sm:w-1/2 mt-10 mb-10 md:w-1/2 p-2 md:p-3 lg:p-4 letter relative rounded-lg overflow-hidden shadow-lg">
                     <div id="name" class="absolute top-0 text-lg font-serif leading-tight md:text-xl">{{ $message->user->name }}さんから</div>
                         <div class="w-50 h-50 flex justify-center">
                         @if($message->image_name)
                             <div class="w-40 h-40 flex items-center justify-center">
-                                <img src="{{ asset('storage/images/'.$message->image_name)}}" class="mx-auto" style="height:150px; width:150px;" >
+                                <img src="{{ asset('storage/images/'.$message->image_name)}}" class="mx-auto" style="height:150px; width:150px; object-fit: contain;" >
                             </div>
                         @else
                             <div class="bg-gray-300 flex items-center justify-center" style="height:150px; width:150px;">
@@ -88,7 +88,7 @@
                             </div>
                         @endif
                         </div>
-                <div class="h-48 md:h-56 lg:h-64 bg-white bg-opacity-80 flex items-start justify-start p-4 md:p-6 lg:p-8" style="border-radius: 10px;">
+                <div class="min-h-48 md:min-h-56 lg:min-h-64 bg-white bg-opacity-80 flex items-start justify-start p-4 md:p-6 lg:p-8" style="border-radius: 10px; flex-wrap: wrap;">
                     <p id="message" class="text-lg font-serif leading-tight md:text-xl">{{ $message->message }}</p>
                 </div>
                 <form method="GET" action="{{ route('responseteach.create') }}">

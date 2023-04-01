@@ -7,6 +7,8 @@ use Validator;
 use App\Models\Responseteach;
 use App\Models\Message;
 use App\Models\User;
+use SendGrid;
+use SendGrid\Mail\Mail;
 
 class ResponseteachController extends Controller
 {
