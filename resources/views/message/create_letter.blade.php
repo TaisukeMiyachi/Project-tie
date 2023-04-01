@@ -53,39 +53,35 @@
                     <img src="{{ asset('images/12929_paint.png') }}" alt="">
                 </div>
             </div>
-            <div class="mx-auto max-w-2xl mt-10  px-4  sm:px-6 lg:max-w-7xl lg:px-8">
-                <label class=" w-full h-full block flex justify-center mb-10">
-                    <textarea class="px-4 py-4 resize-none w-40 md:w-1/2 h-70 md:h-64 block rounded-md shadow-md focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="message" id="" cols="30" rows="10" placeholder="メッセージを書いてください" type="text" style="font-size:20px">{{ old('message') }}</textarea>
-                    <!-- <textarea class="w-30 h-30 mt-1 block rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" rows="3" placeholder="手紙を書いてください" type="text" name="message">{{ old('message') }}
-                        {{ old('message') }}
-                    </textarea> -->
+            <div class="mx-auto max-w-2xl mt-10 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+                <label class="block mb-10">
+                    <textarea class="px-4 py-4 resize-none w-full md:w-1/2 h-70 md:h-64 block rounded-md shadow-md focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-lg" name="message" id="" cols="30" rows="10" placeholder="メッセージを書いてください" type="text">{{ old('message') }}</textarea>
                 </label>
-                <form class="mt-10">
+                <form class="flex justify-center mt-10">
                     <input type="file" accept='image/*' name="image" onchange="previewImage(this);">
                 </form>
                 <div class="flex justify-center">
                     <p>
-                        <!-- Preview:<br> -->
-                        <img id="preview" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                            style="max-width:200px;">
+                    <img id="preview" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                        style="max-width:200px;">
                     </p>
                 </div>
                 <x-input-error class="mb-4" :messages="$errors->all()"/>
                 <script>
                     function previewImage(obj) {
-                        var fileReader = new FileReader();
-                        fileReader.onload = (function () {
-                            document.getElementById('preview').src = fileReader.result;
-                        });
-                        fileReader.readAsDataURL(obj.files[0]);
+                    var fileReader = new FileReader();
+                    fileReader.onload = (function () {
+                        document.getElementById('preview').src = fileReader.result;
+                    });
+                    fileReader.readAsDataURL(obj.files[0]);
                     }
                 </script>
                 <div class="flex items-center justify-center mt-4">
-                    <x-primary-button type="submit" class="shadow-lg bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white rounded-full border-4 border-gray-300 px-4 py-2 w-50 h-12 font-bold mr-20">
-                        <span class="text-xl">確 認</span>
+                    <x-primary-button type="submit" class="shadow-lg bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white rounded-full border-4 border-gray-300 px-4 py-2 w-50 h-12 font-bold">
+                    <span class="text-xl">確 認</span>
                     </x-primary-button>
                 </div>
-            </div>  
+            </div>
         </form>
     </div>
 </body>
