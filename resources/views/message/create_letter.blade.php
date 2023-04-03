@@ -42,17 +42,18 @@
   <form class="mb-6 mt-20" action="{{ route('presentation') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <input type="hidden" name="id" value="{{$id}}" />
-    <div class="sm:flex sm:justify-center sm:items-center">
-      <div class="sm:w-20 sm:mr-3">
-        <img src="{{ asset('images/12920_paint.png') }}" alt="">
-      </div>
-      <h2 class="font-bold mt-3 text-gray-500 text-sm sm:text-lg">
-        お世話になった先生へメッセージを送りましょう。</br>ぜひ写真も送って近況を知らせてください。
-    </h2>
-      <div class="sm:w-20 sm:ml-3">
-        <img src="{{ asset('images/12929_paint.png') }}" alt="">
-      </div>
-    </div>
+    <div class="flex flex-col items-center justify-center">
+  <div class="w-32 md:w-40 mb-4">
+    <img src="{{ asset('images/12920_paint.png') }}" alt="">
+  </div>
+  <h2 class="font-bold text-center text-gray-500 text-sm md:text-lg">
+    お世話になった先生へメッセージを送りましょう。</br>ぜひ写真も送って近況を知らせてください。
+  </h2>
+  <div class="w-32 md:w-40 mt-4">
+    <img src="{{ asset('images/12929_paint.png') }}" alt="">
+  </div>
+</div>
+
     <div class="mx-auto max-w-2xl mt-10 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
       <label class="block mb-10">
         <textarea class="px-4 py-4 resize-none w-full md:w-1/2 h-70 md:h-64 block rounded-md shadow-md focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-lg sm:text-sm sm:mx-auto sm:mt-10" name="message" id="" cols="30" rows="10" placeholder="メッセージを書いてください" type="text">{{ old('message') }}</textarea>
