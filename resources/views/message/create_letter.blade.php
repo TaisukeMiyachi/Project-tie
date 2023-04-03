@@ -48,7 +48,7 @@
       </div>
       <h2 class="font-bold mt-3 text-gray-500 text-sm sm:text-lg">
         お世話になった先生へメッセージを送りましょう。</br>ぜひ写真も送って近況を知らせてください。
-</h2>
+    </h2>
       <div class="sm:w-20 sm:ml-3">
         <img src="{{ asset('images/12929_paint.png') }}" alt="">
       </div>
