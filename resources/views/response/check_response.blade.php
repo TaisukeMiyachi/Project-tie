@@ -55,7 +55,7 @@
                 </div>
                 @endif
             </div>
-            <div id="message" class="h-48 md:h-56 lg:h-64 bg-white bg-opacity-80 flex items-start justify-start p-4 md:p-6 lg:p-8" style="border-radius: 10px;">
+            <div id="message" class="px-4 py-4 resize-none w-full sm:w-full md:w-1/2 h-70 md:h-64 block rounded-md shadow-md focus:ring focus:ring-indigo-200 focus:ring-opacity-50" style="border-radius: 10px;">
                 <p id="message" class="text-lg font-serif leading-tight md:text-xl">{{ $data->message }}</p>
             </div>
         </section>
