@@ -18,3 +18,21 @@ module.exports = {
 
     plugins: [require('@tailwindcss/forms')],
 };
+
+// tailwind.config.js
+module.exports = {
+    purge: [
+        // ...
+    ],
+    theme: {
+        extend: {
+            backgroundColor: {
+                'orange-600': '#F59E0B',
+                'orange-500': '#FBBF24',
+            },
+        },
+    },
+    variants: {},
+    plugins: [],
+}
+
