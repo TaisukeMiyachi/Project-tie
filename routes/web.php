@@ -10,6 +10,7 @@ use App\Http\Controllers\QRCodeController;
 use App\Models\Message;
 use App\Models\User;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,71 +23,72 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 */
 
 
-
+//トップページ
 Route::get('/', function () {
     return view('welcome');
 });
 
+//QRコード（ログインせずに見れるページ）
 Route::get('/messageqr/{id}', function ($id) {
- $message = Message::find($id);
+    $message = Message::find($id);
 
-// dd($id);
-$user_id = $message->user_id;
-$user = User::where('id', $user_id)->first();
-$user_name = $user->name;
+    $user_id = $message->user_id;
+    $user = User::where('id', $user_id)->first();
+    $user_name = $user->name;
 
-$data = [
-    'message' => $message,
-    'user_name' => $user_name,
-    'id' => $id,
-];
-// dd($data);
+    $data = [
+        'message' => $message,
+        'user_name' => $user_name,
+        'id' => $id,
+    ];
 
-return view('messageqr', $data);
+    return view('messageqr', $data);
 })->name('messageqr');
 
 
+//ログインしていないユーザーを強制遷移
+Route::middleware(['auth'])->group(function(){
 
-//My page(生徒用)
-Route::get('/mypagestu', 'App\Http\Controllers\MessageController@mypagestu')->name('mypagestu');
+    //My page(生徒用)
+    Route::get('/mypagestu', 'App\Http\Controllers\MessageController@mypagestu')->name('mypagestu');
 
-//message CRUD処理
-Route::resource('message', MessageController::class);
+    //message CRUD処理
+    Route::resource('message', MessageController::class);
 
-Route::get('/checkqr', 'App\Http\Controllers\MessageController@checkqr')->name('checkqr');
+    Route::get('/checkqr', 'App\Http\Controllers\MessageController@checkqr')->name('checkqr');
 
-Route::post('/message/store', 'App\Http\Controllers\MessageController@store')->name('store');
+    Route::post('/message/store', 'App\Http\Controllers\MessageController@store')->name('store');
 
-Route::post('/message/presentation', 'App\Http\Controllers\MessageController@presentation')->name('presentation');
+    Route::post('/message/presentation', 'App\Http\Controllers\MessageController@presentation')->name('presentation');
 
-//message check
-Route::get('/check', 'App\Http\Controllers\MessageController@check')->name('check');
+    //message check
+    Route::get('/check', 'App\Http\Controllers\MessageController@check')->name('check');
 
-//response CRUD処理
-Route::resource('response', ResponseController::class);
+    //response CRUD処理
+    Route::resource('response', ResponseController::class);
 
-//response check
-Route::get('/checkres', 'App\Http\Controllers\ResponseController@checkres')->name('checkres');
+    //response check
+    Route::get('/checkres', 'App\Http\Controllers\ResponseController@checkres')->name('checkres');
 
-Route::post('/response/presentation', 'App\Http\Controllers\ResponseController@presentation')->name('res.presentation');
+    Route::post('/response/presentation', 'App\Http\Controllers\ResponseController@presentation')->name('res.presentation');
 
-//My page(先生用)
-Route::get('/mypageteach', 'App\Http\Controllers\ResponseteachController@mypageteach')->name('mypageteach');
+    //My page(先生用)
+    Route::get('/mypageteach', 'App\Http\Controllers\ResponseteachController@mypageteach')->name('mypageteach');
 
-//response（先生から） CRUD処理
-Route::resource('responseteach', ResponseteachController::class);
+    //response（先生から） CRUD処理
+    Route::resource('responseteach', ResponseteachController::class);
 
-//response check（先生から）
-Route::get('/checkresteach', 'App\Http\Controllers\ResponseteachController@checkres')->name('checkresteach');
+    //response check（先生から）
+    Route::get('/checkresteach', 'App\Http\Controllers\ResponseteachController@checkres')->name('checkresteach');
 
-Route::post('/responseteach/presentation', 'App\Http\Controllers\ResponseteachController@presentation')->name('resteach.presentation');
-//mail配信
-Route::post('/mail/send', [MailController::class, 'send']) -> name('mail.send');
+    Route::post('/responseteach/presentation', 'App\Http\Controllers\ResponseteachController@presentation')->name('resteach.presentation');
+    //mail配信
+    Route::post('/mail/send', [MailController::class, 'send']) -> name('mail.send');
 
-//QRコード
-Route::get('/qrcode/{invite_code}', [QRCodeController::class, 'generateQRCode']);
+    //QRコード
+    Route::get('/qrcode/{invite_code}', [QRCodeController::class, 'generateQRCode']);
 
-
+});
 
 //ログイン
 Route::get('/dashboard', function () {

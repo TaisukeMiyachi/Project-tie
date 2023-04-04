@@ -1,0 +1,1 @@
+<img src="{{ asset('images/BlueBird.png') }}" alt="PNG Image" width="500" height="500" style="margin: 30px auto;">
