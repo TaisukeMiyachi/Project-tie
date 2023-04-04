@@ -48,8 +48,8 @@
             @endif
             </div>
 
-            <label class=" w-full h-full block flex justify-center mb-10">
-                <textarea class="px-4 py-4 resize-none w-40 md:w-1/2 h-70 md:h-64 block rounded-md shadow-md focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="message" type="text" style="font-size:20px">{{ $data->message }}</textarea>
+           <label class="w-full h-full block flex justify-center mb-10">
+                <textarea class="px-4 py-4 resize-none w-full sm:w-full md:w-1/2 h-70 md:h-64 block rounded-md shadow-md focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="message" type="text" style="font-size:20px">{{ $data->message }}</textarea>
             </label>
 
 
