@@ -101,7 +101,7 @@ class MessageController extends Controller
         $userName = auth()->user()->name; // ログインユーザーの名前を取得
 
         return view('qrcode', [
-            'qrcode' => QrCode::size(300)->generate($url),
+            'qrcode' => QrCode::size(100)->generate($url),
             'userName' => $userName, // 取得したユーザー名をビューに渡す
         ]);
     }

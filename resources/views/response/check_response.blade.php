@@ -60,40 +60,7 @@
            <label class="w-full h-full block flex justify-center mb-10">
                 <textarea class="px-4 py-4 resize-none w-full sm:w-full md:w-1/2 h-70 md:h-64 block rounded-md shadow-md focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="message" type="text" style="font-size:20px">{{ $data->message }}</textarea>
             </label>
-
-
-            <!-- <div class="flex items-center justify-center mt-4">
-                <form action="{{ route('message.store') }}" method="POST">
-                    @csrf
-                    <input type="hidden" name="message" value="{{ $data->message }}">
-                    <input type="hidden" name="image_name" value="{{ $data->image_name }}">
-                    <x-primary-button class="ml-3" style="font-size:24px">
-                        {{ __('QRコードを発行する') }}
-                    </x-primary-button>
-                </form>
-            </div> -->
-        </section>
-        <!-- メイン -->
-        <!-- @csrf
-        <section class="flex justify-center">
-            <div class="w-full mt-60 sm:w-1/2 mb-10 md:w-1/3 p-2 md:p-3 lg:p-4 letter relative rounded-lg overflow-hidden shadow-lg">     
-                <div class="w-50 h-50 flex justify-center">
-                @if($data->image_name)
-                <div class="w-40 h-40 flex items-center justify-center">
-                    <img src="{{ asset('storage/images/'.$data->image_name)}}" class="mx-auto" style="height:150px; width:150px; object-fit: contain;" >
-                </div>
-                @else
-                <div class="bg-gray-300 flex items-center justify-center" style="height:150px; width:150px;">
-                    <span class="text-gray-500 text-lg md:text-xl" style="text-align: center; line-height: 150px;">noimage</span>
-                </div>
-                @endif
-            </div>
-            <div id="message" class="bg-white px-4 py-4 w-full sm:w-full md:w-1/2 h-70 md:h-64 block rounded-md shadow-md focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mx-auto" style="border-radius: 10px;">
-                <p id="message" class="text-lg font-serif leading-tight md:text-xl">{{ $data->message }}</p>
-            </div>
-        </section> -->
-
-        
+        </section> 
         <div class="flex items-center justify-center mt-4">
             <form id="response-form" action="{{ route('response.store') }}" method="POST">
                 @csrf
@@ -104,7 +71,7 @@
                 <button type="submit" class="ml-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 {{ __('送信') }}
                 </button>
-                </form>
+            </form>
         </div>
 
                 <script>
