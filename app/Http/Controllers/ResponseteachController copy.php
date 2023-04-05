@@ -72,6 +72,9 @@ class ResponseteachController extends Controller
         $message -> user_id = auth() -> user() -> id;
         $message -> message = $request -> message;
         $message -> send_to = $request -> send_to;
+        $message -> name = $request -> name;
+        
+        dd($message -> name);
         
         if(request('image')){
             $original = request() -> file("image") -> getClientoriginalName();
