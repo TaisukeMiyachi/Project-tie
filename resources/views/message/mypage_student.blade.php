@@ -72,7 +72,7 @@
             </div>
             <!-- メインメニュー -->
             <div class="hidden sm:flex sm:items-center">
-                <div class="text-gray-500 hover:text-gray-800">マイページ</div>
+                <div class="text-gray-500">{{ Auth::user()->name }}さんのマイページ</div>
                 <div class="ml-4">
                 <a href="#" id="index" class="text-gray-500 hover:text-gray-800 font-medium transition duration-150 ease-in-out">出したメッセージ一覧</a>
                 </div>
@@ -116,8 +116,9 @@
 </script>
 
     <!-- body -->
-    <section class="w-80% mx-auto my-8 bg-orange-50 shadow-lg rounded-lg">
-        <div id="name" class="mt-30 px-8 pt-40 text-gray-500 text-3xl font-bold text-center font-serif">{{ Auth::user()->name }}さんへ届いたメッセージ</div>    
+    <section class="mt-40 w-80% mx-auto my-8 bg-orange-50 shadow-lg rounded-lg">
+        <img src="{{ asset('images/BlueBird.png') }}" alt="PNG Image" width="200" height="200" style="margin: 70px auto;">
+        <div id="name" class="px-8 text-gray-500 text-3xl font-bold text-center font-serif">{{ Auth::user()->name }}さんへ届いたメッセージ</div>    
             <div class="flex flex-wrap justify-between max-w-5xl mx-auto mt-10">
             @foreach ($data as $message)
                 <div class="w-full sm:w-1/2 mt-10 mb-10 md:w-1/2 p-2 md:p-3 lg:p-4 letter relative rounded-lg overflow-hidden shadow-lg">
@@ -147,5 +148,5 @@
             </div>
             @endforeach
         </div>
-    </body>
+    </section>
 </html>

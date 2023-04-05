@@ -19,7 +19,7 @@
 
 <body class="bg-orange-50">
     <div class="container mx-auto px-4 py-24 flex flex-col items-center">
-        <h1 class="text-4xl font-bold mb-8">WebPigeon</h1>
+        <img src="{{ asset('images/BlueBird.png') }}" alt="PNG Image" width="200" height="200" style="margin: 30px auto;">
         <p class="text-xl">メッセージを送りました。</p>
         
         <div class="mt-8">
