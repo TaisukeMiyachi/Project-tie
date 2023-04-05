@@ -30,7 +30,7 @@
     <!-- QRコード表示部分 -->
     <div class="max-w-7xl mx-auto py-12 sm:px-6 lg:px-8 text-center">
         <div class="px-4 py-6 bg-white shadow-lg rounded-lg">
-            <h1 class="text-3xl font-bold text-gray-900 mb-10">Web Pigeon</h1>
+            <img src="{{ asset('images/BlueBird.png') }}" alt="PNG Image" width="150" height="150" style="margin: 30px auto;">
             <h1 class="text-3xl font-bold text-gray-900 mb-10">（　　　　　　）先生へ</h1>
             <h2 class="text-gray-600 ">{{ $userName }}さんよりメッセージが届いています。</h2>
             <h2 class="text-gray-600 ">下のQRコードをスキャンして確認してください。</h2>
