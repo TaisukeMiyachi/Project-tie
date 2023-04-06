@@ -46,30 +46,60 @@
 </head>
 
 <body class="w-screen bg-orange-50">
-    <!-- ヘッダー -->
-    <nav class="w-full bg-white shadow-lg">
-        <div class="flex items-center justify-between h-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center">
-                <div class="flex-shrink-0">
-                    @csrf
-                    <a class="text-gray-500 hover:text-gray-800" href="{{ route('logout') }}"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        {{ __('ログアウト') }}
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
-                     @csrf
-                    </form>
-                </div>
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-24">
+            <!-- ログアウトボタン -->
+            <div class="flex-shrink-0">
+                @csrf
+                <a class="text-gray-500 hover:text-gray-800" href="{{ route('logout') }}"
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                {{ __('ログアウト') }}
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                @csrf
+                </form>
             </div>
-            <div class="flex items-center">
-                <div class="text-gray-500 hover:text-gray-800">{{ Auth::user()->name }}先生のマイページ</div>
+            <!-- ハンバーガーメニュー -->
+            <div class="flex items-center sm:hidden">
+                <button type="button" class="text-gray-500 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-expanded="false" aria-haspopup="true" onclick="toggleMenu()">
+                <span class="sr-only">メニューを開く</span>
+                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+                </button>
+            </div>
+            <!-- メインメニュー -->
+            <div class="hidden sm:flex sm:items-center">
+                <div class="text-gray-500">{{ Auth::user()->name }}先生のマイページ</div>
                     <div class="ml-4">
                         <a href="#" id="index" class="text-gray-500 hover:text-gray-800 font-medium transition duration-150 ease-in-out">出したメッセージ一覧</a>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- ハンバーガーメニューのコンテンツ -->
+        <div class="hidden sm:hidden" id="menu">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <div class="text-gray-500 hover:text-gray-800">マイページ</div>
+                    <a href="#" id="index" class="block text-gray-500 hover:text-gray-800 font-medium" ></a>
+                </div>
+            </div>
+        </div>
     </nav>
+
+<script>
+  function toggleMenu() {
+    var menu = document.getElementById("menu");
+    if (menu.classList.contains("hidden")) {
+      menu.classList.remove("hidden");
+    } else {
+      menu.classList.add("hidden");
+    }
+  }
+</script>
+
+
     <!-- body -->
     <section class="mt-40 w-80% mx-auto my-8 bg-orange-50 shadow-lg rounded-lg">
         <img src="{{ asset('images/BlueBird.png') }}" alt="PNG Image" width="200" height="200" style="margin: 70px auto;">
