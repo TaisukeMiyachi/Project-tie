@@ -30,7 +30,7 @@ Route::get('/', function () {
 
 //QRコード（ログインせずに見れるページ）
 Route::get('/messageqr/{id}', function ($id) {
-// dd($id);
+dd($id);
     $message = Message::find($id);
     $user_id = $message->user_id;
     $user = User::where('id', $user_id)->first();
