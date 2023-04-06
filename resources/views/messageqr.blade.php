@@ -42,9 +42,6 @@
             <label class="w-full h-full block flex justify-center mb-10">
                 <textarea class="px-4 py-4 resize-none w-full sm:w-full md:w-1/2 h-70 md:h-64 block rounded-md shadow-md focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="message" type="text" style="font-size:20px">{{ $message->message }}</textarea>
             </label>
-            <!-- <label class="w-full h-full block flex justify-center mb-4">
-                <textarea class="px-4 py-4 resize-none w-full h-70 md:h-64 block rounded-md shadow-md focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-lg" name="message" type="text" readonly>{{ $message->message }}</textarea>
-            </label> -->
             <div class="text-center">
                 <a href="{{ route('register2', ['id' => $id]) }}" class="ml-4 text-sm btn teacher-btn text-gray-700 dark:text-gray-500">アカウント登録へ</a>
             </div>
