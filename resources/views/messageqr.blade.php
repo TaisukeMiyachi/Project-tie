@@ -1,4 +1,3 @@
-Copy code
 <!DOCTYPE html>
 <html lang="ja">
 <!-- 省略 -->
@@ -20,10 +19,14 @@ Copy code
         @endif
         </div>
 
-        <label class="w-full h-full block flex justify-center mb-10">
-            <textarea class="px-4 py-4 resize-none w-full sm:w-full md:w-1/2 h-70 md:h-64 block rounded-md shadow-md focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-lg" name="message" type="text" readonly>{{ $message->content }}</textarea>
-        </label>
-        <a href="{{ route('register2', ['id' => $id]) }}" class="ml-4 text-sm btn teacher-btn text-gray-700 dark:text-gray-500">アカウント登録へ</a>
+        <div class="w-full md:w-1/2 mx-auto">
+            <label class="w-full h-full block flex justify-center mb-4">
+                <textarea class="px-4 py-4 resize-none w-full h-70 md:h-64 block rounded-md shadow-md focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-lg" name="message" type="text" readonly>{{ $message->your_correct_property_name }}</textarea>
+            </label>
+            <div class="text-center">
+                <a href="{{ route('register2', ['id' => $id]) }}" class="ml-4 text-sm btn teacher-btn text-gray-700 dark:text-gray-500">アカウント登録へ</a>
+            </div>
+        </div>
     </div>
 </body>
 </html>
