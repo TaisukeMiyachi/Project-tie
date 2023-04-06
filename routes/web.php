@@ -41,7 +41,6 @@ Route::get('/messageqr/{id}', function ($id) {
         'user_name' => $user_name,
         'id' => $id,
     ];
-    dd($data);
     return view('messageqr', $data);
 })->name('messageqr');
 
