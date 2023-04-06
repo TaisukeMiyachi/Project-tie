@@ -24,21 +24,22 @@
          @csrf
         <div class="mt-0 h-full text-center">
             <img src="{{ asset('images/BlueBird.png') }}" alt="PNG Image" width="200" height="200" style="margin: 30px auto;">
-                <h1 id="name" class="font-bold mt-50 mb-0 text-gray-500" style="font-size:24px;">{{ $data->name }}さんからのメッセージ</h1>
+                <h1 id="name" class="font-bold mt-50 mb-0 text-gray-500" style="font-size:24px;">{{ $data['user_name'] }}さんからのメッセージ</h1>
                     <div class="w-50 h-50 flex justify-center">
                     @if($data->image_name)
-                        <div class="w-50 h-50 flex items-center justify-center">
-                            <img src="{{ asset('storage/images/'.$data->image_name)}}" class="mx-auto" style="height:150px; width:150px; object-fit: contain;" >
-                        </div>
-                    @else
-                        <div class="bg-gray-300 flex items-center justify-center" style="height:150px; width:150px;">
-                            <span class="text-gray-500 text-lg md:text-xl" style="text-align: center; line-height: 150px;">noimage</span>
-                        </div>
-                    @endif
-                    </div>
-                <label class="w-full h-full block flex justify-center mb-10">
-                    <textarea class="px-4 py-4 resize-none w-full sm:w-full md:w-1/2 h-70 md:h-64 block rounded-md shadow-md focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="message" type="text" style="font-size:20px">{{ $data->message }}</textarea>
-                </label>
+                <div class="w-50 h-50 flex items-center justify-center">
+                    <img src="{{ asset('storage/images/'.$data->image_name)}}" class="mx-auto" style="height:150px; width:150px; object-fit: contain;" >
+                </div>
+            @else
+                <div class="bg-gray-300 flex items-center justify-center" style="height:150px; width:150px;">
+                    <span class="text-gray-500 text-lg md:text-xl" style="text-align: center; line-height: 150px;">noimage</span>
+                </div>
+            @endif
+            </div>
+
+           <label class="w-full h-full block flex justify-center mb-10">
+                <textarea class="px-4 py-4 resize-none w-full sm:w-full md:w-1/2 h-70 md:h-64 block rounded-md shadow-md focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="message" type="text" style="font-size:20px">{{ $data->message }}</textarea>
+            </label>
             <a href="{{ route('register2', ['id' => $id]) }}" class="ml-4 text-sm btn teacher-btn text-gray-700 dark:text-gray-500">アカウント登録へ</a>
         </div>
 </body>
