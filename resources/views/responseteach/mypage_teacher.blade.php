@@ -102,7 +102,7 @@
 
     <!-- body -->
     <section class="mt-40 w-80% mx-auto my-8 bg-orange-50 shadow-lg rounded-lg">
-        <img src="{{ asset('images/BlueBird.png') }}" alt="PNG Image" width="200" height="200" style="margin: 70px auto;">
+        <img src="{{ asset('images/BlueBird.png') }}" alt="PNG Image" width="200" height="200" style="margin: auto;">
             <div id="name" class="px-8 text-gray-500 text-3xl font-bold text-center font-serif">{{ Auth::user()->name }}先生へ届いたメッセージ</div>    
             <div class="flex flex-wrap justify-between max-w-5xl mx-auto mt-10">
             @foreach ($data as $message)
