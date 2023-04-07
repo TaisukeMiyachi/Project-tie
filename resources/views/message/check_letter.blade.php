@@ -42,33 +42,12 @@
                 <img id="preview" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
                     style="max-width:200px;">
             </p>
-           
-            
-                        <!-- <div class="flex flex-col mb-4">
-              <x-input-label for="tweet" :value="__('Tweet')" />
-              <x-text-input id="tweet" class="block mt-1 w-full" type="text" name="tweet" :value="old('tweet')" required autofocus />
-              <x-input-error :messages="$errors->get('tweet')" class="mt-2" />
-            </div>
-            <div class="flex flex-col mb-4">
-              <x-input-label for="description" :value="__('Description')" />
-              <x-text-input id="description" class="block mt-1 w-full" type="text" name="description" :value="old('description')" required autofocus />
-              <x-input-error :messages="$errors->get('description')" class="mt-2" />
-            </div> -->
             <div class="flex items-center justify-center mt-4">
               <x-primary-button class="ml-3">
                 <a href="{{ route('checkqr') }}">{{ __('QRコードを作成する') }}</a>
               </x-primary-button>
             </div>
-
-            <!-- <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                    <a href="#"
-                        class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                        内容を確認する
-                    </a>
-                </div> -->
             </form>
-
-            <!-- 返信手紙表示エリア -->
         </div>
     </div>
 

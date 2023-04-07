@@ -42,8 +42,7 @@
     </nav>
     @csrf
         <section class="mt-40 h-full text-center">
-            <img src="{{ asset('images/BlueBird.png') }}" alt="PNG Image" width="200" height="200" style="margin: 30px auto;">
-            <!-- <h1 id="name" class="font-bold mt-0 mb-10 text-gray-500" style="font-size:48px;">Web Pigeon</h1> -->
+            <img src="{{ asset('images/BlueBird.png') }}" alt="PNG Image" width="200" height="200" style="margin: auto;">
             <h1 id="name" class="font-bold mt-50 mb-0 text-gray-500" style="font-size:24px;">{{ $data->name }}さんへ</h1>
             <div class="w-50 h-50 flex justify-center">
             @if($data->image_name)
