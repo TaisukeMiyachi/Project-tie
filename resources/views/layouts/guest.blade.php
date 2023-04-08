@@ -19,9 +19,15 @@
     <body class="font-sans text-gray-900 antialiased">
         <div class="min-h-screen flex flex-col items-center justify-center bg-orange-300">
             <div class="w-40 h-40 mb-6">
-                <a href="/">
-                    <x-custom-logo class="fill-current text-gray-500" />
-                </a>
+                @auth
+                    <a href="/">
+                        <x-custom-logo class="fill-current text-gray-500" />
+                    </a>
+                @else
+                    <a href="{{ url('/') }}">
+                        <x-custom-logo class="fill-current text-gray-500" />
+                    </a>
+                @endauth
             </div>
             <div class="w-full sm:max-w-md px-6 py-4 bg-orange-300 rounded-lg shadow-md">
                 {{ $slot }}
