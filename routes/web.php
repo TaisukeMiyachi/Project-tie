@@ -103,7 +103,9 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 //ログアウト処理
-Route::post('/logout', function () {
-    Auth::logout();
-    return redirect('/');
-})->name('logout');
+Route::middleware(['auth'])->group(function(){
+    Route::post('/logout', function () {
+        Auth::logout();
+        return redirect('/');
+    })->name('logout');
+});
