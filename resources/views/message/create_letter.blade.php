@@ -36,8 +36,7 @@
             </div>
         </div>
     </nav>
-<!-- メイン -->
-
+    <!-- メイン -->
     <div class="mt-40 h-full text-center">
         <form class="mb-6 mt-20" action="{{ route('presentation') }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -62,7 +61,6 @@
                 </form>
                 <div class="flex justify-center">
                     <p>
-                        <!-- Preview:<br> -->
                         <img id="preview" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
                             style="max-width:200px;">
                     </p>
@@ -78,7 +76,7 @@
                     }
                 </script>
                 <div class="flex items-center justify-center mt-4">
-                    <x-primary-button type="submit" class="shadow-lg bg-orange-500 shadow-orange-500/50 text-white rounded-full border-4 border-gray-300 px-4 py-2 text-xl w-50 h-12 font-bold mr-20">
+                    <x-primary-button type="submit" class="shadow-lg bg-orange-500 shadow-orange-500/50 text-white rounded-full border-4 border-gray-300 px-4 py-2 text-xl w-50 h-12 font-bold">
                         内容を確認する
                     </x-primary-button>
                 </div>
