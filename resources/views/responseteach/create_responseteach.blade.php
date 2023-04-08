@@ -50,12 +50,11 @@
                 </div>
                 <p class="font-bold mt-50 text-gray-500" style="font-size:24px;">
                 {{$data->user->name}}さんへ<br>返信を作成しましょう。
-            </p>
+                </p>
                 <div class="w-20 ml-3">
                     <img src="{{ asset('images/12929_paint.png') }}" alt="">
                 </div>
             </div>
-            
             <div class="mx-auto max-w-2xl mt-10  px-4  sm:px-6 lg:max-w-7xl lg:px-8">
                 <label class=" w-full h-full block flex justify-center mb-10">
                     <textarea class="bg-white px-4 py-4 w-full sm:w-full md:w-1/2 h-70 md:h-64 block rounded-md shadow-md focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mx-auto" name="message" id="" cols="30" rows="10" placeholder="メッセージを書いてください" type="text" style="font-size:20px">{{ old('message') }}</textarea>
