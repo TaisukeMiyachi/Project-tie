@@ -30,7 +30,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         $usertype = Auth::user()->usertype;
-    // dd($usertype);
+    
         if($usertype == 1){        
             return redirect("mypagestu");
         }elseif($usertype == 2){
