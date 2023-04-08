@@ -82,7 +82,7 @@
                     }
                 </script>
                 <div class="flex items-center justify-center mt-4">
-                    <x-primary-button type="submit" class="shadow-lg bg-orange-500 shadow-orange-500/50 text-white rounded-full border-4 border-gray-300 px-4 py-2 text-xl w-50 h-12 font-bold mr-20">
+                    <x-primary-button type="submit" class="shadow-lg bg-orange-500 shadow-orange-500/50 text-white rounded-full border-4 border-gray-300 px-4 py-2 text-xl w-50 h-12 font-bold">
                         内容を確認する
                     </x-primary-button>
                 </div>
