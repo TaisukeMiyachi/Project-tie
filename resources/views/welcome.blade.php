@@ -52,7 +52,7 @@
     <body>
         <div class="relative flex items-center justify-center min-h-screen  sm:items-center py-4 sm:pt-0">    
             <div style="text-align: center;">
-                <img src="{{ asset('images/Webpigeon.png') }}" alt="PNG Image" width="500" height="500" style="margin: 30px auto;">
+                <iframe src="{{ asset('images/Webpigeon.pdf') }}" width="500" height="500"></iframe>
                <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 10px;">
                     <a href="{{ route('login') }}" class="login-btn text-aline-center shadow-lg text-gray-600 rounded-full px-4 py-2 text-xl w-64 h-12 font-bold border-none" style="text-align:center;">Start</a>
                     @if (Route::has('register'))
