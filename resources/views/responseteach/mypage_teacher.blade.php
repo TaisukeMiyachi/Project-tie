@@ -132,6 +132,16 @@
                 </form>
             </div>
             @endforeach
+            <div class="flex items-center justify-center">
+                <p style="color:red; font-size:20px;">
+                これは開発中のテスト版です。<br>
+                「返信」ボタンよりメッセージを送ってくれた生徒へ返信ができます。<br>
+                本来は返信すると相手のE-mailアドレスへ通知が行きますが、<br>
+                今回はテストですので、生徒が返信に気付かない可能性があります。<br>
+
+                右のフォームからアンケートにご協力をお願いします。</p>
+                <img src="{{ asset('images/teacher.png') }}" alt="PNG Image" width="200" height="200" style="margin: 70px auto;">
+            </div>
         </div>
     </body>
 </html>

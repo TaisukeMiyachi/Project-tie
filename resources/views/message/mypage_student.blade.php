@@ -147,6 +147,13 @@
                 </form>
             </div>
             @endforeach
+            <div class="flex items-center justify-center">
+                <p style="color:red; font-size:20px;">
+                これは開発中のテスト版です。<br>
+                試しに先生へのメッセージを作成し、可能であればQRコードを先生へFAXしてください。<br>
+                右のフォームからアンケートにご協力をお願いします。</p>
+                <img src="{{ asset('images/student.png') }}" alt="PNG Image" width="200" height="200" style="margin: 70px auto;">
+            </div>
         </div>
     </section>
 </html>
