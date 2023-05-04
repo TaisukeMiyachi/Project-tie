@@ -86,7 +86,9 @@ Route::middleware(['auth'])->group(function(){
 
     //QRコード
     Route::get('/qrcode/{invite_code}', [QRCodeController::class, 'generateQRCode']);
-
+    
+    //出したメッセージ（生徒）
+    Route::get('/sendedstu', 'App\Http\Controllers\SendedstuController@index') -> name('sendedstu');
 });
 
 //ログイン
