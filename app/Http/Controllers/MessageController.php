@@ -12,7 +12,6 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class MessageController extends Controller
 {
-    
     //My page（生徒用）
    public function mypagestu()
     {
