@@ -139,8 +139,12 @@
                 本来は返信すると相手のE-mailアドレスへ通知が行きますが、<br>
                 今回はテストですので、生徒が返信に気付かない可能性があります。<br>
 
-                右のフォームからアンケートにご協力をお願いします。</p>
-                <img src="{{ asset('images/teacher.png') }}" alt="PNG Image" width="200" height="200" style="margin: 70px auto;">
+                右のフォームまたはリンクからアンケートにご協力をお願いします。</p>
+                <div class="flex flex-col items-center">
+                    <img src="{{ asset('images/teacher.png') }}" alt="PNG Image" width="200" height="200" style="margin: 70px auto;">
+                    <a href="https://forms.gle/JHcJCupzySa7HVnRA" class="text-blue-600">https://forms.gle/JHcJCupzySa7HVnRA</a>
+                </div>
+                
             </div>
         </div>
     </body>
