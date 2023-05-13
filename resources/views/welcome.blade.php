@@ -47,19 +47,28 @@
                 .btn:hover {
                 transform: translateY(-2px);
                 }
+                .login-btn {
+                background-color: #87CEFA;
+                }
+                
         </style>
         </head>
-    <body>
-        <div class="relative flex items-center justify-center min-h-screen  sm:items-center py-4 sm:pt-0">    
+    <body  style="background: url('{{ asset('images/kousha.png') }}') no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; ">
+         <div class="relative flex items-center justify-center min-h-screen  sm:items-center py-4 sm:pt-0  opacity: 0.8; ">    
             <div style="text-align: center;">
-                <img src="{{ asset('images/Webpigeon.png') }}" alt="PNG Image" width="500" height="500" style="margin: 30px auto;">
+                <div class="">
+                    <img src="{{ asset('images/Webpigeon.png') }}" alt="PNG Image" width="500" height="500" class="m-auto" width="500" height="500">
+                
                <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 10px;">
-                    <a href="{{ route('login') }}" class="login-btn text-aline-center shadow-lg text-gray-600 rounded-full px-4 py-2 text-xl w-64 h-12 font-bold border-none" style="text-align:center;">Start</a>
+                    <a href="{{ route('login') }}" class="login-btn text-aline-center shadow-lg text-gray-600 rounded-full px-4 py-2 text-xl w-64 h-12 font-bold border-none" style="text-align:center;">はじめる</a>
                     @if (Route::has('register'))
-                        <a href="{{ route('register') }}" class="text-gray-500 dark:text-gray-500">アカウント作成</a>
+                        <a href="{{ route('register') }}" class="text-gray-500 dark:text-gray-500 mb-5">アカウント作成</a>
                     @endif
                 </div>
+                </div>
             </div>
-        </div>
-    </body>
+        </div>   
+        </body>
+        
+    <!-- </body> -->
 </html>

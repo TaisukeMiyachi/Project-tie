@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->text("message");
             $table->string("image_name")->nullable();
+            $table->string('teacher_name');
             $table->integer('send_to')->nullable();
             $table->timestamps();
             $table->softDeletes();

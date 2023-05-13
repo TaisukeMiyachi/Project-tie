@@ -31,7 +31,7 @@
     <div class="max-w-7xl mx-auto py-12 sm:px-6 lg:px-8 text-center">
         <div class="px-4 py-6 bg-white shadow-lg rounded-lg">
             <img src="{{ asset('images/BlueBird.png') }}" alt="PNG Image" width="150" height="150" style="margin: 30px auto;">
-            <h1 class="text-3xl font-bold text-gray-900 mb-10">（　　　　　　）先生へ</h1>
+            <h1 class="text-3xl font-bold text-gray-900 mb-10">{{ $teacherName }}先生へ</h1>
             <h2 class="text-gray-600 ">{{ $userName }}さんよりメッセージが届いています。</h2>
             <h2 class="text-gray-600 ">下のQRコードをスキャンして確認してください。</h2>
             <h2 class="text-gray-600 ">また、アカウントを作成していただければ、返信をすることもできます。</h2>
@@ -50,6 +50,12 @@
             <button onclick="window.print()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-0 ml-0">
                 印刷する
             </button>
+            <form action="{{ route('select') }}" method="get">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-0 ml-0">
+                    FAXを送信する
+                </button>
+            </form>
+
             <a href="{{ route('mypagestu') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-0 ml-4">
                 mypageへ
             </a>

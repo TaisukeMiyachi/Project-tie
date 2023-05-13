@@ -55,7 +55,7 @@
                 @csrf
                 <a class="text-gray-500 hover:text-gray-800" href="{{ route('logout') }}"
                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-               <img src="{{ asset('images/BlueBird.png') }}" alt="PNG Image" width="100" height="100" style="margin: 70px auto;">
+                {{ __('ログアウト') }}
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
                 @csrf
@@ -72,17 +72,7 @@
             </div>
             <!-- メインメニュー -->
             <div class="hidden sm:flex sm:items-center">
-                <div class="ml-4">
-                    <a href="{{ route('sendedstu', ['id' => Auth::user()->id]) }}" id="index" class="text-gray-500 hover:text-gray-800 font-medium transition duration-150 ease-in-out">届けたメッセージ一覧</a>
-                </div>
-                <form id="message" class="ml-4" action="{{ route('message.create') }}" method="GET"> 
-                @foreach($data as $message)
-                    <input type="hidden" name="id" value="{{ $message->send_to }}" />
-                @endforeach
-                <button type="submit" class="shadow-lg bg-orange-500 hover:bg-orange-600 shadow-orange-500/50 text-white rounded-full px-4 py-2 text-xl w-64 h-12 font-bold">
-                    メッセージを書く
-                </button>
-                </form>
+                <a href="{{ route('mypageteach') }}" class="text-gray-500 mr-10">{{ Auth::user()->name }}先生のマイページへ</a>
             </div>
             </div>
         </div>
@@ -91,14 +81,6 @@
             <div class="px-2 pt-2 pb-3 space-y-1">
             <div class="text-gray-500 hover:text-gray-800">マイページ</div>
             <a href="#" id="index" class="block text-gray-500 hover:text-gray-800 font-medium" ></a>
-            <form id="message" action="{{ route('message.create') }}" method="GET"> 
-                @foreach($data as $message)
-                <input type="hidden" name="id" value="{{ $message->send_to }}" />
-                @endforeach
-                <button type="submit" class="block w-full text-left text-gray-500 hover:text-gray-800 font-medium py-2 px-3 rounded-md">
-                メッセージを書く
-                </button>
-            </form>
             </div>
         </div>
     </nav>
@@ -116,19 +98,12 @@
 
     <!-- body -->
     <section class="mt-40 w-80% mx-auto my-8 bg-orange-50 shadow-lg rounded-lg">
-        <div class="w-full flex items-center justify-center">
-            
-                <div class="text-gray-500 text-5xl">{{ Auth::user()->name }}さんのマイページ</div>
-            
-        </div>
-
-        <img src="{{ asset('images/post.png') }}" alt="PNG Image" width="120" height="120" style="margin: 30px auto;">
-                
-        <div id="name" class="px-8 text-gray-500 text-3xl font-bold text-center font-serif">届いたメッセージたち</div>    
-            <div class="flex flex-wrap justify-between max-w-5xl mx-auto mt-10">
-            @foreach ($data as $message)
+        <img src="{{ asset('images/BlueBird.png') }}" alt="PNG Image" width="200" height="200" style="margin: 70px auto;">
+        <div id="name" class="px-8 text-gray-500 text-3xl font-bold text-center font-serif">届けたメッセージ一覧</div>    
+        <div class="flex flex-wrap justify-between max-w-5xl mx-auto mt-10">
+            @foreach ($data->messages as $message)
                 <div class="w-full sm:w-1/2 mt-10 mb-10 md:w-1/2 p-2 md:p-3 lg:p-4 letter relative rounded-lg overflow-hidden shadow-lg">
-                    <div id="name" class="absolute top-0 text-lg font-serif leading-tight md:text-xl">{{ $message->user->name }}先生から</div>
+                    
                         <div class="w-50 h-50 flex justify-center">
                         @if($message->image_name)
                             <div class="w-40 h-40 flex items-center justify-center">
@@ -143,27 +118,17 @@
                 <div class="min-h-48 md:min-h-56 lg:min-h-64 bg-white bg-opacity-80 flex items-start justify-start p-4 md:p-6 lg:p-8" style="border-radius: 10px; flex-wrap: wrap;">
                     <p id="message" class="text-lg font-serif leading-tight md:text-xl">{{ $message->message }}</p>
                 </div>
-                <form method="GET" action="{{ route('response.create') }}">
-                    @csrf
-                    <div class="flex justify-center">
-                        <input type="hidden" name="message" value="{{ $message }}">
-                        <input type="hidden" name="send_to" value="{{$message -> user_id}}">
-                        <button type="submit" class="px-3 py-2 text-white bg-blue-500 hover:bg-blue-600 rounded-full text-sm md:text-base">返信する</button>
-                    </div>
-                </form>
             </div>
             @endforeach
+
+
+
             <div class="flex items-center justify-center">
                 <p style="color:red; font-size:20px;">
                 これは開発中のテスト版です。<br>
-                試しに先生へのメッセージを作成し、<br>
-                可能であればQRコードを先生へFAXしてください。<br>
-                右のフォームまたはリンクからアンケートにご協力をお願いします。</p>
-            
-                <div class="flex flex-col items-center">
-                    <img src="{{ asset('images/student.png') }}" alt="PNG Image" width="200" height="200" class="mb-4">
-                    <a href="https://forms.gle/uXqzUkXJTu9Z4AoU9" class="text-blue-600">https://forms.gle/uXqzUkXJTu9Z4AoU9</a>
-                </div>
+                試しに先生へのメッセージを作成し、可能であればQRコードを先生へFAXしてください。<br>
+                右のフォームからアンケートにご協力をお願いします。</p>
+                <img src="{{ asset('images/student.png') }}" alt="PNG Image" width="200" height="200" style="margin: 70px auto;">
             </div>
         </div>
     </section>

@@ -7,7 +7,7 @@
             戻る
         </a>
     </div>
-    <form method="POST" action="{{ route('login2') }}">
+    <form method="POST" action="{{ route('login3store') }}">
         @csrf
 
         <!-- Email Address -->
@@ -28,6 +28,8 @@
 
             <x-input-error :messages="$errors->get('パスワード')" class="mt-2" />
         </div>
+
+        <input type="hidden" name="id" value="{{ $id }}">
 
         <!-- Remember Me -->
         <div class="block mt-4">

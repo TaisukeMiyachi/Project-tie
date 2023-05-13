@@ -54,7 +54,7 @@
                 @csrf
                 <a class="text-gray-500 hover:text-gray-800" href="{{ route('logout') }}"
                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                {{ __('ログアウト') }}
+                <img src="{{ asset('images/BlueBird.png') }}" alt="PNG Image" width="100" height="100" style="margin: 70px auto;">
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
                 @csrf
@@ -71,10 +71,9 @@
             </div>
             <!-- メインメニュー -->
             <div class="hidden sm:flex sm:items-center">
-                <div class="text-gray-500">{{ Auth::user()->name }}先生のマイページ</div>
                     <div class="ml-4">
-                        <a href="#" id="index" class="text-gray-500 hover:text-gray-800 font-medium transition duration-150 ease-in-out">出したメッセージ一覧</a>
-                    </div>
+                    <a href="{{ route('sendedteach', ['id' => Auth::user()->id]) }}" id="index" class="text-gray-500 hover:text-gray-800 font-medium transition duration-150 ease-in-out">届けたメッセージ一覧</a>
+                </div>
                 </div>
             </div>
         </div>
@@ -102,8 +101,14 @@
 
     <!-- body -->
     <section class="mt-40 w-80% mx-auto my-8 bg-orange-50 shadow-lg rounded-lg">
-        <img src="{{ asset('images/BlueBird.png') }}" alt="PNG Image" width="200" height="200" style="margin: auto;">
-            <div id="name" class="px-8 text-gray-500 text-3xl font-bold text-center font-serif">{{ Auth::user()->name }}先生へ届いたメッセージ</div>    
+        <div class="w-full flex items-center justify-center">
+            
+                <div class="text-gray-500 text-5xl">{{ Auth::user()->name }}先生のマイページ</div>
+            
+        </div>
+
+        <img src="{{ asset('images/post.png') }}" alt="PNG Image" width="120" height="120" style="margin: 30px auto;">
+            <div id="name" class="px-8 text-gray-500 text-3xl font-bold text-center font-serif">届いたメッセージ</div>    
             <div class="flex flex-wrap justify-between max-w-5xl mx-auto mt-10">
             @foreach ($data as $message)
                 <div class="w-full sm:w-1/2 mt-10 mb-10 md:w-1/2 p-2 md:p-3 lg:p-4 letter relative rounded-lg overflow-hidden shadow-lg">

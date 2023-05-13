@@ -23,8 +23,13 @@ class ResponseteachController extends Controller
     public function mypageteach()
     {
         $user_id = auth()->user()->id;
-        $data = Message::with('user')->where('send_to', $user_id)->get();   
+        $data = Message::with('user')
+            ->where('send_to', $user_id)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
         return view('responseteach.mypage_teacher', ['data' => $data]);
+
     }
 
     public function index()

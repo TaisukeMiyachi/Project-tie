@@ -35,7 +35,7 @@
         @csrf
         <div class="mt-0 h-full text-center">
             <img src="{{ asset('images/BlueBird.png') }}" alt="PNG Image" width="200" height="200" style="margin: auto;">
-            <h1 id="name" class="font-bold mt-50 mb-0 text-gray-500" style="font-size:24px;">{{ $data->name }}さんからのメッセージ</h1>
+            <h1 id="name" class="font-bold mt-50 mb-0 text-gray-500" style="font-size:24px;">{{ $data->name }}より、{{ $data->teacher_name }}先生へ</h1>
             <div class="w-50 h-50 flex justify-center">
             @if($data->image_name)
                 <div class="w-50 h-50 flex items-center justify-center">
@@ -47,17 +47,19 @@
                 </div>
             @endif
             </div>
-
-           <label class="w-full h-full block flex justify-center mb-10">
+            
+           <label class="w-full h-full block flex justify-center ">
                 <textarea class="px-4 py-4 resize-none w-full sm:w-full md:w-1/2 h-70 md:h-64 block rounded-md shadow-md focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="message" type="text" style="font-size:20px">{{ $data->message }}</textarea>
-            </label>
-
+           </label>
+        
 
             <div class="flex items-center justify-center mt-4">
                 <form action="{{ route('message.store') }}" method="POST">
+                    
                     @csrf
                     <input type="hidden" name="message" value="{{ $data->message }}">
                     <input type="hidden" name="image_name" value="{{ $data->image_name }}">
+                    <input type="hidden" name="teacher_name" value="{{ $data->teacher_name }}">
                     <x-primary-button class="ml-3" style="font-size:24px">
                         {{ __('QRコードを発行する') }}
                     </x-primary-button>

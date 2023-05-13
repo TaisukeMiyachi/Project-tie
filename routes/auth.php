@@ -11,6 +11,9 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\RegisteredTeacherController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\Auth\LoginteachController;
+
+
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -71,6 +74,12 @@ Route::middleware('guest')->group(function () {
                 ->name('login2');
 
     Route::post('login2', [AuthenticatedteachSessionController::class, 'store']);
+
+    Route::get('login3/{id}', [LoginteachController::class, 'create'])
+                ->name('login3');
+
+    Route::post('login3', [LoginteachController::class, 'store'])
+                ->name('login3store');
 
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
                 ->name('password.request');
