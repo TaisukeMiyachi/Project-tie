@@ -10,6 +10,7 @@ use App\Http\Controllers\QRCodeController;
 use App\Models\Message;
 use App\Models\User;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use App\Http\Controllers\SendFaxController;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,6 +82,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/checkresteach', 'App\Http\Controllers\ResponseteachController@checkres')->name('checkresteach');
 
     Route::post('/responseteach/presentation', 'App\Http\Controllers\ResponseteachController@presentation')->name('resteach.presentation');
+    
     //mail配信
     Route::post('/mail/send', [MailController::class, 'send']) -> name('mail.send');
 
@@ -89,12 +91,23 @@ Route::middleware(['auth'])->group(function(){
     
     //出したメッセージ（生徒）
     Route::get('/sendedstu', 'App\Http\Controllers\SendedstuController@index') -> name('sendedstu');
+
+    //出したメッセージ（先生）
+    Route::get('/sendedteach', 'App\Http\Controllers\SendedteachController@index') -> name('sendedteach');
+
+    //FAX送信先選択画面へ
+    Route::get('/select', 'App\Http\Controllers\SendFaxController@index') -> name('select');
+
+    //FAX送信先完了画面へ
+    Route::post('/faxcomplete', 'App\Http\Controllers\SendFaxController@show') -> name('complete');
+
+
 });
 
 //ログイン
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -105,9 +118,9 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 //ログアウト処理
-Route::middleware(['auth'])->group(function(){
+// Route::middleware(['auth'])->group(function(){
     Route::post('/logout', function () {
         Auth::logout();
         return redirect('/');
     })->name('logout');
-});
+// });

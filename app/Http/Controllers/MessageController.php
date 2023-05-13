@@ -62,6 +62,7 @@ class MessageController extends Controller
         $data = new Message();
         $data -> user_id = auth() -> user() -> id;
         $data -> message = $request -> message;
+        $data -> teacher_name = $request -> teacher_name;
         $data -> send_to = $request -> send_to;
         $data -> name = $name;
        
@@ -90,6 +91,7 @@ class MessageController extends Controller
         $message->user_id = auth()->user()->id;
         $message->message = $request->message;
         $message->image_name = $request->image_name;
+        $message->teacher_name = $request->teacher_name;
 
         $message->save();
 
@@ -98,10 +100,11 @@ class MessageController extends Controller
         $url = env('APP_URL')."/messageqr/{$lastId}"; // QRコードに表示するURL
 
         $userName = auth()->user()->name; // ログインユーザーの名前を取得
-
+        
         return view('qrcode', [
             'qrcode' => QrCode::size(100)->generate($url),
             'userName' => $userName, // 取得したユーザー名をビューに渡す
+            'teacherName' => $message->teacher_name,
         ]);
     }
     

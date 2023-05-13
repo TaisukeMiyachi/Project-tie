@@ -22,6 +22,7 @@ class Message extends Model
     'teacher_id',
     'message',
     'image_name',
+    'teacher_name',
     'send',
   ];
   

@@ -41,18 +41,21 @@
         <form class="mb-6 mt-20" action="{{ route('presentation') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="id" value="{{$id}}" />
-            <div class="flex justify-center mt-10">
-                <div class="w-20 mr-3">
-                    <img src="{{ asset('images/12920_paint.png') }}" alt="">
-                </div>
+                <img src="{{ asset('images/letter.png') }}" alt="" class="mx-auto w-20">
+                <div class="flex justify-center mt-10">
+                
                 <p class="font-bold mt-50 text-gray-500" style="font-size:24px;">
                 お世話になった先生へ<br>メッセージを送りましょう。
-            </p>
-                <div class="w-20 ml-3">
-                    <img src="{{ asset('images/12929_paint.png') }}" alt="">
-                </div>
+                </p>
+                
             </div>
             <div class="mx-auto max-w-2xl mt-10  px-4  sm:px-6 lg:max-w-7xl lg:px-8">
+                <label class="w-full h-full block flex justify-center mb-10">
+                   <div class="flex items-center">
+                        <input class="px-4 py-2 resize-none w-2/3 sm:w-2/3 md:w-1/2 block rounded-md shadow-md focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="teacher_name" id="teacher_name" placeholder="先生の名前" type="text" style="font-size:20px">{{ old('teacher_name') }}</input>
+                        <span class="ml-2 text-lg">先生へ</span>
+                    </div>
+                </label>
                 <label class="w-full h-full block flex justify-center mb-10">
                     <textarea class="px-4 py-4 resize-none w-full sm:w-full md:w-1/2 h-70 md:h-64 block rounded-md shadow-md focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="message" id="" cols="30" rows="10" placeholder="メッセージを書いてください" type="text" style="font-size:20px">{{ old('message') }}</textarea>
                 </label>

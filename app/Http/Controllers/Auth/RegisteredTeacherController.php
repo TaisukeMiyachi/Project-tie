@@ -46,13 +46,11 @@ class RegisteredTeacherController extends Controller
             'usertype' => 2,
         ]);
 
-        // dd($request->id);
-
         event(new Registered($user));
 
         // usersテーブルから、最後に追加されたレコードのidを取得する
         $lastid = DB::table('users')->latest('id')->value('id');
-// dd($lastid);
+
         // messageテーブルから、idが$request->idであるレコードを取得する
         $message = Message::where('id', $request->id)->first();
 
