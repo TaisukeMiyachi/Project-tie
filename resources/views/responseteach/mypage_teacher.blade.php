@@ -137,7 +137,7 @@
                 </form>
             </div>
             @endforeach
-            <div class="flex items-center justify-center">
+            <!-- <div class="flex items-center justify-center">
                 <p style="color:red; font-size:20px;">
                 これは開発中のテスト版です。<br>
                 「返信」ボタンよりメッセージを送ってくれた生徒へ返信ができます。<br>
@@ -150,7 +150,7 @@
                     <a href="https://forms.gle/JHcJCupzySa7HVnRA" class="text-blue-600">https://forms.gle/JHcJCupzySa7HVnRA</a>
                 </div>
                 
-            </div>
+            </div> -->
         </div>
     </body>
 </html>
