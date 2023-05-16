@@ -153,7 +153,7 @@
                 </form>
             </div>
             @endforeach
-            <div class="flex items-center justify-center">
+            <!-- <div class="flex items-center justify-center">
                 <p style="color:red; font-size:20px;">
                 これは開発中のテスト版です。<br>
                 試しに先生へのメッセージを作成し、<br>
@@ -164,7 +164,7 @@
                     <img src="{{ asset('images/student.png') }}" alt="PNG Image" width="200" height="200" class="mb-4">
                     <a href="https://forms.gle/uXqzUkXJTu9Z4AoU9" class="text-blue-600">https://forms.gle/uXqzUkXJTu9Z4AoU9</a>
                 </div>
-            </div>
+            </div> -->
         </div>
     </section>
 </html>
